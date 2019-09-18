@@ -25,15 +25,38 @@ namespace AsesoriasUABC
                         .Include("~/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Conetent/toastr/toastr.min.js",
+                      "~/Content/sweetalert2/sweetalert2.js",
                       "~/Content/bootstrap/bootstrap.js",
+                      "~/Content/bootstrap/bootstrap.bundle.js",
                       "~/Scripts/adminlte/adminlte.js",
                       "~/Scripts/fastclick/fastclick.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/adminlte.css",
-                       "~/Content/fontawesome/css/all.css",
-                      "~/Content/all.css"
+            bundles.Add(new ScriptBundle("~/bundles/tables").Include(
+               "~/Content/dataTables/jquery.dataTables.js",
+                "~/Content/dataTables/dataTables.bootstrap4.js"
+                ));
+
+            bundles.Add(new StyleBundle("~/Content/css/tables")
+             .Include("~/Content/dataTables/dataTables.bootstrap4.css"));
+
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //          "~/Content/adminlte.css",
+            //           "~/Content/fontawesome/css/all.css",
+            //          "~/Content/all.css"
+            //          ));
+
+            bundles.Add(new StyleBundle("~/Content/css")
+                .Include(
+                      "~/Content/fontawesome/css/all.css",
+                      "~/Content/dist/css/adminlte.css",
+                      "~/Content/sweetalert2/sweetalert2.css",
+                     // "~/Content/animate.css",
+                     // "~/Content/Site.css",
+                      "~/Content/icheck-bootstrap/icheck-bootstrap.css",
+                      "~/Content/all.css",
+                      "~/Content/toastr/toastr.css"
                       ));
         }
     }

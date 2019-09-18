@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pruebaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Equipos">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+    </Key>
+    <Property Name="IdEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Folio" Type="int" Nullable="false" />
+    <Property Name="Garantia" Type="int" Nullable="false" />
+    <Property Name="Equipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Presupuesto" Type="int" Nullable="false" />
+    <Property Name="Diagnostico" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Contacto" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Tecnico" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaIn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaOut" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TipoEquipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ubicacion" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="pruebaModelStoreContainer">
+    <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
