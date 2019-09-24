@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AsesoriasUABC.Models;
+using AsesoriasUABC.ViewModels;
 
 namespace AsesoriasUABC.Controllers
 {
@@ -49,16 +50,22 @@ namespace AsesoriasUABC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_asesoria,matricula,id_materia,id_asesor,cvc,time")] AsesoriasTb asesoriasTb)
+        public ActionResult Create(AsesoriaModelView ase)
         {
-            if (ModelState.IsValid)
-            {
-                db.AsesoriasTb.Add(asesoriasTb);
+            //if (ModelState.IsValid)
+            //{
+                AsesoriasTb dbase = new AsesoriasTb();
+                dbase.cvc = ase.cvc.ToString();
+                dbase.matricula = ase.matricula;
+                dbase.id_materia = ase.id_materia;
+                dbase.id_asesor = ase.id_asesor;
+                dbase.time = "24/09/2019";
+                db.AsesoriasTb.Add(dbase);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            //}
 
-            return View(asesoriasTb);
+           // return View(ase);
         }
 
         // GET: AsesoriasTbs/Edit/5
