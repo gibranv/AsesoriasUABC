@@ -38,6 +38,9 @@ namespace AsesoriasUABC.Controllers
         // GET: AsesoriasTbs/Create
         public ActionResult Create()
         {
+            ViewBag.LstMateria = new SelectList(db.MateriasTb.ToList(), "id_materia", "nombre");
+            ViewBag.LstTema = new SelectList(db.temasTb.ToList(), "id_Temas", "nombre_tema");
+            ViewBag.LstAsesor = new SelectList(db.AsesoresTb.ToList(), "Id_Asesores", "nombre");
             return View();
         }
 

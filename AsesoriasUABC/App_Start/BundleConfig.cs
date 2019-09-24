@@ -31,6 +31,7 @@ namespace AsesoriasUABC
                       "~/Content/bootstrap/bootstrap.bundle.js",
                       "~/Scripts/adminlte/adminlte.js",
                       "~/Scripts/fastclick/fastclick.js",
+                      "~/Scripts/custom/lstAsesoria.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/tables").Include(

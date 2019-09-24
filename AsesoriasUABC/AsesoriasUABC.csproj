@@ -376,6 +376,7 @@
       <DependentUpon>AsesoriasModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\custom\lstAsesoria.js" />
     <Content Include="Scripts\custom\modal.js" />
     <Content Include="Scripts\fastclick\fastclick.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
