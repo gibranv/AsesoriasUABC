@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBAsesoriasFIADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AlumnosTb">
+    <Key>
+      <PropertyRef Name="id_Alumno" />
+    </Key>
+    <Property Name="id_Alumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matricula" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellidoP" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellidoM" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="idCarrera" Type="int" Nullable="false" />
+    <Property Name="grupo" Type="int" />
+  </EntityType>
+  <EntityType Name="AsesoresTb">
+    <Key>
+      <PropertyRef Name="Id_Asesores" />
+    </Key>
+    <Property Name="Id_Asesores" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ApellidoP" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="codigo_empleado" Type="int" Nullable="false" />
+    <Property Name="correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="contraseña" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="sexo" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="ApellidoM" Type="nvarchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="AsesoriasTb">
+    <Key>
+      <PropertyRef Name="Id_asesoria" />
+    </Key>
+    <Property Name="Id_asesoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matricula" Type="int" />
+    <Property Name="id_materia" Type="int" />
+    <Property Name="id_asesor" Type="int" />
+    <Property Name="cvc" Type="nchar" MaxLength="10" />
+    <Property Name="time" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="carreras">
+    <Key>
+      <PropertyRef Name="id_carrera" />
+    </Key>
+    <Property Name="id_carrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codigo" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MateriasTb">
+    <Key>
+      <PropertyRef Name="id_materia" />
+    </Key>
+    <Property Name="id_materia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="clave_materia" Type="int" Nullable="false" />
+    <Property Name="plan_estudios" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="temasTb">
+    <Key>
+      <PropertyRef Name="id_Temas" />
+    </Key>
+    <Property Name="id_Temas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numero_tema" Type="int" Nullable="false" />
+    <Property Name="nombre_tema" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="DBAsesoriasFIADModelStoreContainer">
+    <EntitySet Name="AlumnosTb" EntityType="Self.AlumnosTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AsesoresTb" EntityType="Self.AsesoresTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AsesoriasTb" EntityType="Self.AsesoriasTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="carreras" EntityType="Self.carreras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="temasTb" EntityType="Self.temasTb" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

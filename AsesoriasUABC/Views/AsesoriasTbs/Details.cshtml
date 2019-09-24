@@ -1,0 +1,59 @@
+﻿@model AsesoriasUABC.Models.AsesoriasTb
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AsesoriasTb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.matricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.matricula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_materia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_materia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_asesor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_asesor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cvc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cvc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_asesoria }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

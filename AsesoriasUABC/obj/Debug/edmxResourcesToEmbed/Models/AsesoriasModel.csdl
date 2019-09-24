@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBAsesoriasFIADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AlumnosTb">
+    <Key>
+      <PropertyRef Name="id_Alumno" />
+    </Key>
+    <Property Name="id_Alumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="matricula" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apellidoP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apellidoM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idCarrera" Type="Int32" Nullable="false" />
+    <Property Name="grupo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="AsesoresTb">
+    <Key>
+      <PropertyRef Name="Id_Asesores" />
+    </Key>
+    <Property Name="Id_Asesores" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ApellidoP" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="codigo_empleado" Type="Int32" Nullable="false" />
+    <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ApellidoM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AsesoriasTb">
+    <Key>
+      <PropertyRef Name="Id_asesoria" />
+    </Key>
+    <Property Name="Id_asesoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="matricula" Type="Int32" />
+    <Property Name="id_materia" Type="Int32" />
+    <Property Name="id_asesor" Type="Int32" />
+    <Property Name="cvc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="time" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MateriasTb">
+    <Key>
+      <PropertyRef Name="id_materia" />
+    </Key>
+    <Property Name="id_materia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="clave_materia" Type="Int32" Nullable="false" />
+    <Property Name="plan_estudios" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="temasTb">
+    <Key>
+      <PropertyRef Name="id_Temas" />
+    </Key>
+    <Property Name="id_Temas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="numero_tema" Type="Int32" Nullable="false" />
+    <Property Name="nombre_tema" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="DBAsesoriasFIADEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AlumnosTb" EntityType="Self.AlumnosTb" />
+    <EntitySet Name="AsesoresTb" EntityType="Self.AsesoresTb" />
+    <EntitySet Name="AsesoriasTb" EntityType="Self.AsesoriasTb" />
+    <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" />
+    <EntitySet Name="temasTb" EntityType="Self.temasTb" />
+    <EntitySet Name="carreras" EntityType="DBAsesoriasFIADModel.carreras" />
+  </EntityContainer>
+  <EntityType Name="carreras">
+    <Key>
+      <PropertyRef Name="id_carrera" />
+    </Key>
+    <Property Name="id_carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codigo" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

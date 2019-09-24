@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBAsesoriasFIADModelStoreContainer" CdmEntityContainer="DBAsesoriasFIADEntities">
+    <EntitySetMapping Name="Carrera">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Carrera">
+        <MappingFragment StoreEntitySet="Carrera">
+          <ScalarProperty Name="ID_Carrera" ColumnName="ID_Carrera" />
+          <ScalarProperty Name="codigo_carrera" ColumnName="codigo_carrera" />
+          <ScalarProperty Name="nombre_carrera" ColumnName="nombre_carrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

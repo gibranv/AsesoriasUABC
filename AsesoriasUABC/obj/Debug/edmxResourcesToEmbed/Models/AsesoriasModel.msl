@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBAsesoriasFIADModelStoreContainer" CdmEntityContainer="DBAsesoriasFIADEntities">
+    <EntitySetMapping Name="AlumnosTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AlumnosTb">
+        <MappingFragment StoreEntitySet="AlumnosTb">
+          <ScalarProperty Name="id_Alumno" ColumnName="id_Alumno" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+          <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+          <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
+          <ScalarProperty Name="grupo" ColumnName="grupo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AsesoresTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoresTb">
+        <MappingFragment StoreEntitySet="AsesoresTb">
+          <ScalarProperty Name="Id_Asesores" ColumnName="Id_Asesores" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+          <ScalarProperty Name="codigo_empleado" ColumnName="codigo_empleado" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AsesoriasTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoriasTb">
+        <MappingFragment StoreEntitySet="AsesoriasTb">
+          <ScalarProperty Name="Id_asesoria" ColumnName="Id_asesoria" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+          <ScalarProperty Name="id_asesor" ColumnName="id_asesor" />
+          <ScalarProperty Name="cvc" ColumnName="cvc" />
+          <ScalarProperty Name="time" ColumnName="time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MateriasTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.MateriasTb">
+        <MappingFragment StoreEntitySet="MateriasTb">
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="clave_materia" ColumnName="clave_materia" />
+          <ScalarProperty Name="plan_estudios" ColumnName="plan_estudios" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="temasTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.temasTb">
+        <MappingFragment StoreEntitySet="temasTb">
+          <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
+          <ScalarProperty Name="numero_tema" ColumnName="numero_tema" />
+          <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="carreras">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.carreras">
+        <MappingFragment StoreEntitySet="carreras">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

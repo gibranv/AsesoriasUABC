@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBAsesoriasFIADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AlumnosTb">
+          <Key>
+            <PropertyRef Name="id_Alumno" />
+          </Key>
+          <Property Name="id_Alumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="matricula" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidoM" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="idCarrera" Type="int" Nullable="false" />
+          <Property Name="grupo" Type="int" />
+        </EntityType>
+        <EntityType Name="AsesoresTb">
+          <Key>
+            <PropertyRef Name="Id_Asesores" />
+          </Key>
+          <Property Name="Id_Asesores" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoP" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="codigo_empleado" Type="int" Nullable="false" />
+          <Property Name="correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="contraseña" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="sexo" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ApellidoM" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="AsesoriasTb">
+          <Key>
+            <PropertyRef Name="Id_asesoria" />
+          </Key>
+          <Property Name="Id_asesoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="matricula" Type="int" />
+          <Property Name="id_materia" Type="int" />
+          <Property Name="id_asesor" Type="int" />
+          <Property Name="cvc" Type="nchar" MaxLength="10" />
+          <Property Name="time" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="carreras">
+          <Key>
+            <PropertyRef Name="id_carrera" />
+          </Key>
+          <Property Name="id_carrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MateriasTb">
+          <Key>
+            <PropertyRef Name="id_materia" />
+          </Key>
+          <Property Name="id_materia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="clave_materia" Type="int" Nullable="false" />
+          <Property Name="plan_estudios" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="temasTb">
+          <Key>
+            <PropertyRef Name="id_Temas" />
+          </Key>
+          <Property Name="id_Temas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numero_tema" Type="int" Nullable="false" />
+          <Property Name="nombre_tema" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DBAsesoriasFIADModelStoreContainer">
+          <EntitySet Name="AlumnosTb" EntityType="Self.AlumnosTb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AsesoresTb" EntityType="Self.AsesoresTb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AsesoriasTb" EntityType="Self.AsesoriasTb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="carreras" EntityType="Self.carreras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="temasTb" EntityType="Self.temasTb" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBAsesoriasFIADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AlumnosTb">
+          <Key>
+            <PropertyRef Name="id_Alumno" />
+          </Key>
+          <Property Name="id_Alumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matricula" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidoP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidoM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idCarrera" Type="Int32" Nullable="false" />
+          <Property Name="grupo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="AsesoresTb">
+          <Key>
+            <PropertyRef Name="Id_Asesores" />
+          </Key>
+          <Property Name="Id_Asesores" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoP" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="codigo_empleado" Type="Int32" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AsesoriasTb">
+          <Key>
+            <PropertyRef Name="Id_asesoria" />
+          </Key>
+          <Property Name="Id_asesoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matricula" Type="Int32" />
+          <Property Name="id_materia" Type="Int32" />
+          <Property Name="id_asesor" Type="Int32" />
+          <Property Name="cvc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="time" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MateriasTb">
+          <Key>
+            <PropertyRef Name="id_materia" />
+          </Key>
+          <Property Name="id_materia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="clave_materia" Type="Int32" Nullable="false" />
+          <Property Name="plan_estudios" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="temasTb">
+          <Key>
+            <PropertyRef Name="id_Temas" />
+          </Key>
+          <Property Name="id_Temas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero_tema" Type="Int32" Nullable="false" />
+          <Property Name="nombre_tema" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DBAsesoriasFIADEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AlumnosTb" EntityType="Self.AlumnosTb" />
+          <EntitySet Name="AsesoresTb" EntityType="Self.AsesoresTb" />
+          <EntitySet Name="AsesoriasTb" EntityType="Self.AsesoriasTb" />
+          <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" />
+          <EntitySet Name="temasTb" EntityType="Self.temasTb" />
+          <EntitySet Name="carreras" EntityType="DBAsesoriasFIADModel.carreras" />
+        </EntityContainer>
+        <EntityType Name="carreras">
+          <Key>
+            <PropertyRef Name="id_carrera" />
+          </Key>
+          <Property Name="id_carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBAsesoriasFIADModelStoreContainer" CdmEntityContainer="DBAsesoriasFIADEntities">
+          <EntitySetMapping Name="AlumnosTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AlumnosTb">
+              <MappingFragment StoreEntitySet="AlumnosTb">
+                <ScalarProperty Name="id_Alumno" ColumnName="id_Alumno" />
+                <ScalarProperty Name="matricula" ColumnName="matricula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+                <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AsesoresTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoresTb">
+              <MappingFragment StoreEntitySet="AsesoresTb">
+                <ScalarProperty Name="Id_Asesores" ColumnName="Id_Asesores" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+                <ScalarProperty Name="codigo_empleado" ColumnName="codigo_empleado" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AsesoriasTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoriasTb">
+              <MappingFragment StoreEntitySet="AsesoriasTb">
+                <ScalarProperty Name="Id_asesoria" ColumnName="Id_asesoria" />
+                <ScalarProperty Name="matricula" ColumnName="matricula" />
+                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+                <ScalarProperty Name="id_asesor" ColumnName="id_asesor" />
+                <ScalarProperty Name="cvc" ColumnName="cvc" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MateriasTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.MateriasTb">
+              <MappingFragment StoreEntitySet="MateriasTb">
+                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="clave_materia" ColumnName="clave_materia" />
+                <ScalarProperty Name="plan_estudios" ColumnName="plan_estudios" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="temasTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.temasTb">
+              <MappingFragment StoreEntitySet="temasTb">
+                <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
+                <ScalarProperty Name="numero_tema" ColumnName="numero_tema" />
+                <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carreras">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.carreras">
+              <MappingFragment StoreEntitySet="carreras">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
