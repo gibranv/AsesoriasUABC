@@ -12,6 +12,7 @@ namespace AsesoriasUABC.ViewModels
         [Display(Name = "Materia")]
         public int id_materia { get; set; }
         [Display(Name = "Tema")]
+        [type()]
         public int id_Tema { get; set; }
         [Display(Name = "Asesor")]
         public int id_asesor { get; set; }
