@@ -7,3 +7,26 @@
     
    
 });
+//$('#mtr').click(function () {
+//    if( $("#matricula").val() != "")
+//    {
+//        GetAlumno($("#matricula").val);
+//    }
+//});
+//function GetAlumno(matricula) {
+//    $.ajaxSetup({ cache: false });
+//    $.ajax({
+//        url: '@Url.RouteUrl("FindAlumno", "AsesoriasTbs")',
+//        data: {
+//            'm': matricula
+//        },
+//        type: 'POST',
+//        cache: false,
+//        success: function (response) {
+//            $("#Nombre").val(response.name);
+//            $("#Carrera").val(response.carrera);
+//        },
+//        error: function (response) {
+//        }
+//    });
+//}
