@@ -40,7 +40,7 @@ namespace AsesoriasUABC.Controllers
         // GET: AsesoriasTbs/Create
         public ActionResult Create()
         {
-
+            
             List<MateriasTb> lstMaterias = db.MateriasTb.ToList();
             List<temasTb> lstTemas = db.temasTb.ToList();
             List<AsesoresTb> lstAsesores = db.AsesoresTb.ToList();
@@ -65,18 +65,18 @@ namespace AsesoriasUABC.Controllers
             ViewBag.LstTema = new SelectList(lstTemas, "id_Temas", "nombre_tema");
             ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
 
-            if (ModelState.IsValid)
-            {
+          //  if (ModelState.IsValid)
+          //  {
                 AsesoriasTb dbase = new AsesoriasTb();
                 dbase.cvc = ase.cvc.ToString();
                 dbase.matricula = ase.matricula;
                 dbase.id_materia = ase.id_materia;
                 dbase.id_asesor = ase.id_asesor;
-                dbase.time = "24/09/2019";
+                
                 db.AsesoriasTb.Add(dbase);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+           // }
 
            return View(ase);
         }
@@ -116,14 +116,40 @@ namespace AsesoriasUABC.Controllers
         {
             int matricula = Convert.ToInt32(m);
             AlumnosTb alumno = new AlumnosTb();
-            alumno = (AlumnosTb)db.AlumnosTb.Where(i => i.matricula == matricula).FirstOrDefault();
-
-            var result = new { status = "Succes", name = alumno.nombre + alumno.apellidoP + alumno.apellidoM, carrera = alumno.idCarrera };
-            return Json(result,JsonRequestBehavior.AllowGet);
+            var result = new {status = "Not Find",name="",carrera=0};
+            alumno = db.AlumnosTb.Where(i => i.matricula == matricula).FirstOrDefault();
+            if(alumno != null)
+            {
+                result = new { status = "Succes", name = alumno.nombre +" "+ alumno.apellidoP +" "+ alumno.apellidoM, carrera = alumno.idCarrera };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetLst(string id_materia)
+        {
+            int id_m = Convert.ToInt32(id_materia);
+            if(db.AlumnosTb.Find( ) != null)
+            {
 
+            }
+            List<temasTb> lstTemas = db.temasTb.ToList().Where(i => i.id_Materias == id_m).ToList();
+
+            ViewBag.LstTema = new SelectList(lstTemas, "id_Temas", "nombre_tema");
+            //ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
+
+            return Json(JsonRequestBehavior.AllowGet);
+        }
         // GET: AsesoriasTbs/Delete/5
+        public ActionResult LstMaterias(string _id_materia)
+        {
+            var id_materia = Convert.ToInt64(_id_materia) ;
+            SelectList lstTemas = new SelectList(db.temasTb.Where(i => i.id_Materias == id_materia).ToList(), "id_Temas", "nombre_tema");
+            SelectList lstAsesores = new SelectList(db.Materias_Asesores.Where( i => i.id_materia == id_materia ).ToList(), "Id_Asesores", "nombre");
+            var result = new { lstTemas, lstAsesores };
+          //  ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
+            return Json(result);
+        }
         public ActionResult Delete(int? id)
         {
             if (id == null)

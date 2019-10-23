@@ -44,6 +44,14 @@
     <Property Name="codigo" Type="int" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Materias_Asesores">
+    <Key>
+      <PropertyRef Name="id_materia" />
+    </Key>
+    <Property Name="id_materia" Type="int" Nullable="false" />
+    <Property Name="id_Asesores" Type="int" />
+    <Property Name="nombre" Type="nchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="MateriasTb">
     <Key>
       <PropertyRef Name="id_materia" />
@@ -60,13 +68,63 @@
     <Property Name="id_Temas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="numero_tema" Type="int" Nullable="false" />
     <Property Name="nombre_tema" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="id_Materias" Type="int" />
   </EntityType>
+  <Association Name="FK_AsesoriasTb_AsesoresTb">
+    <End Role="AsesoresTb" Type="Self.AsesoresTb" Multiplicity="0..1" />
+    <End Role="AsesoriasTb" Type="Self.AsesoriasTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AsesoresTb">
+        <PropertyRef Name="Id_Asesores" />
+      </Principal>
+      <Dependent Role="AsesoriasTb">
+        <PropertyRef Name="id_asesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AsesoriasTb_MateriasTb">
+    <End Role="MateriasTb" Type="Self.MateriasTb" Multiplicity="0..1" />
+    <End Role="AsesoriasTb" Type="Self.AsesoriasTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MateriasTb">
+        <PropertyRef Name="id_materia" />
+      </Principal>
+      <Dependent Role="AsesoriasTb">
+        <PropertyRef Name="id_materia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_temasTb_MateriasTb">
+    <End Role="MateriasTb" Type="Self.MateriasTb" Multiplicity="0..1" />
+    <End Role="temasTb" Type="Self.temasTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MateriasTb">
+        <PropertyRef Name="id_materia" />
+      </Principal>
+      <Dependent Role="temasTb">
+        <PropertyRef Name="id_Materias" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DBAsesoriasFIADModelStoreContainer">
     <EntitySet Name="AlumnosTb" EntityType="Self.AlumnosTb" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AsesoresTb" EntityType="Self.AsesoresTb" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AsesoriasTb" EntityType="Self.AsesoriasTb" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="carreras" EntityType="Self.carreras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materias_Asesores" EntityType="Self.Materias_Asesores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="temasTb" EntityType="Self.temasTb" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AsesoriasTb_AsesoresTb" Association="Self.FK_AsesoriasTb_AsesoresTb">
+      <End Role="AsesoresTb" EntitySet="AsesoresTb" />
+      <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AsesoriasTb_MateriasTb" Association="Self.FK_AsesoriasTb_MateriasTb">
+      <End Role="MateriasTb" EntitySet="MateriasTb" />
+      <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_temasTb_MateriasTb" Association="Self.FK_temasTb_MateriasTb">
+      <End Role="MateriasTb" EntitySet="MateriasTb" />
+      <End Role="temasTb" EntitySet="temasTb" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

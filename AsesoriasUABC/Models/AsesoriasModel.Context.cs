@@ -31,5 +31,6 @@ namespace AsesoriasUABC.Models
         public virtual DbSet<MateriasTb> MateriasTb { get; set; }
         public virtual DbSet<temasTb> temasTb { get; set; }
         public virtual DbSet<carreras> carreras { get; set; }
+        public virtual DbSet<Materias_Asesores> Materias_Asesores { get; set; }
     }
 }

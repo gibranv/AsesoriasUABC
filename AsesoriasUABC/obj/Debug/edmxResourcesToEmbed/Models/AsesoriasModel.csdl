@@ -24,6 +24,7 @@
     <Property Name="contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="ApellidoM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AsesoriasTb" Relationship="DBAsesoriasFIADModel.FK_AsesoriasTb_AsesoresTb" FromRole="AsesoresTb" ToRole="AsesoriasTb" />
   </EntityType>
   <EntityType Name="AsesoriasTb">
     <Key>
@@ -35,6 +36,8 @@
     <Property Name="id_asesor" Type="Int32" />
     <Property Name="cvc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="time" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="AsesoresTb" Relationship="DBAsesoriasFIADModel.FK_AsesoriasTb_AsesoresTb" FromRole="AsesoriasTb" ToRole="AsesoresTb" />
+    <NavigationProperty Name="MateriasTb" Relationship="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb" FromRole="AsesoriasTb" ToRole="MateriasTb" />
   </EntityType>
   <EntityType Name="MateriasTb">
     <Key>
@@ -44,6 +47,8 @@
     <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="clave_materia" Type="Int32" Nullable="false" />
     <Property Name="plan_estudios" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AsesoriasTb" Relationship="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb" FromRole="MateriasTb" ToRole="AsesoriasTb" />
+    <NavigationProperty Name="temasTb" Relationship="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" FromRole="MateriasTb" ToRole="temasTb" />
   </EntityType>
   <EntityType Name="temasTb">
     <Key>
@@ -52,6 +57,8 @@
     <Property Name="id_Temas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="numero_tema" Type="Int32" Nullable="false" />
     <Property Name="nombre_tema" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_Materias" Type="Int32" />
+    <NavigationProperty Name="MateriasTb" Relationship="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" FromRole="temasTb" ToRole="MateriasTb" />
   </EntityType>
   <EntityContainer Name="DBAsesoriasFIADEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AlumnosTb" EntityType="Self.AlumnosTb" />
@@ -60,6 +67,19 @@
     <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" />
     <EntitySet Name="temasTb" EntityType="Self.temasTb" />
     <EntitySet Name="carreras" EntityType="DBAsesoriasFIADModel.carreras" />
+    <AssociationSet Name="FK_AsesoriasTb_AsesoresTb" Association="DBAsesoriasFIADModel.FK_AsesoriasTb_AsesoresTb">
+      <End Role="AsesoresTb" EntitySet="AsesoresTb" />
+      <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AsesoriasTb_MateriasTb" Association="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb">
+      <End Role="MateriasTb" EntitySet="MateriasTb" />
+      <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_temasTb_MateriasTb" Association="DBAsesoriasFIADModel.FK_temasTb_MateriasTb">
+      <End Role="MateriasTb" EntitySet="MateriasTb" />
+      <End Role="temasTb" EntitySet="temasTb" />
+    </AssociationSet>
+    <EntitySet Name="Materias_Asesores" EntityType="DBAsesoriasFIADModel.Materias_Asesores" />
   </EntityContainer>
   <EntityType Name="carreras">
     <Key>
@@ -68,5 +88,49 @@
     <Property Name="id_carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="codigo" Type="Int32" Nullable="false" />
     <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_AsesoriasTb_AsesoresTb">
+    <End Type="DBAsesoriasFIADModel.AsesoresTb" Role="AsesoresTb" Multiplicity="0..1" />
+    <End Type="DBAsesoriasFIADModel.AsesoriasTb" Role="AsesoriasTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AsesoresTb">
+        <PropertyRef Name="Id_Asesores" />
+      </Principal>
+      <Dependent Role="AsesoriasTb">
+        <PropertyRef Name="id_asesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AsesoriasTb_MateriasTb">
+    <End Type="DBAsesoriasFIADModel.MateriasTb" Role="MateriasTb" Multiplicity="0..1" />
+    <End Type="DBAsesoriasFIADModel.AsesoriasTb" Role="AsesoriasTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MateriasTb">
+        <PropertyRef Name="id_materia" />
+      </Principal>
+      <Dependent Role="AsesoriasTb">
+        <PropertyRef Name="id_materia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_temasTb_MateriasTb">
+    <End Type="DBAsesoriasFIADModel.MateriasTb" Role="MateriasTb" Multiplicity="0..1" />
+    <End Type="DBAsesoriasFIADModel.temasTb" Role="temasTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MateriasTb">
+        <PropertyRef Name="id_materia" />
+      </Principal>
+      <Dependent Role="temasTb">
+        <PropertyRef Name="id_Materias" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Materias_Asesores">
+    <Key>
+      <PropertyRef Name="id_materia" />
+    </Key>
+    <Property Name="id_materia" Type="Int32" Nullable="false" />
+    <Property Name="id_Asesores" Type="Int32" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

@@ -11,6 +11,10 @@
         <EntityTypeShape EntityType="DBAsesoriasFIADModel.MateriasTb" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBAsesoriasFIADModel.temasTb" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBAsesoriasFIADModel.carreras" Width="1.5" PointX="5.375" PointY="3.75" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_AsesoriasTb_AsesoresTb" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.Materias_Asesores" Width="1.5" PointX="5.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

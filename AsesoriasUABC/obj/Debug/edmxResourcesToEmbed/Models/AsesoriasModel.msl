@@ -53,6 +53,7 @@
     <EntitySetMapping Name="temasTb">
       <EntityTypeMapping TypeName="DBAsesoriasFIADModel.temasTb">
         <MappingFragment StoreEntitySet="temasTb">
+          <ScalarProperty Name="id_Materias" ColumnName="id_Materias" />
           <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
           <ScalarProperty Name="numero_tema" ColumnName="numero_tema" />
           <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
@@ -65,6 +66,15 @@
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="codigo" ColumnName="codigo" />
           <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materias_Asesores">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Materias_Asesores">
+        <MappingFragment StoreEntitySet="Materias_Asesores">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_Asesores" ColumnName="id_Asesores" />
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

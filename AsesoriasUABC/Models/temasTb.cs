@@ -17,5 +17,8 @@ namespace AsesoriasUABC.Models
         public int id_Temas { get; set; }
         public int numero_tema { get; set; }
         public string nombre_tema { get; set; }
+        public Nullable<int> id_Materias { get; set; }
+    
+        public virtual MateriasTb MateriasTb { get; set; }
     }
 }

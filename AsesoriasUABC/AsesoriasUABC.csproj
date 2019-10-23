@@ -261,6 +261,9 @@
     <Compile Include="Models\MateriasTb.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Materias_Asesores.cs">
+      <DependentUpon>AsesoriasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\temasTb.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
