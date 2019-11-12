@@ -7,110 +7,112 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AsesoriasUABC.Models;
+using AsesoriasUABC.ViewModels;
 
 namespace AsesoriasUABC.Controllers
 {
-    public class EquiposController : Controller
+    public class UsuariosController : Controller
     {
-        private pruebaEntities db = new pruebaEntities();
+        private DBAsesoriasFIADEntities db = new DBAsesoriasFIADEntities();
 
-        // GET: Equipos
+        // GET: Usuarios
         public ActionResult Index()
         {
-            return View(db.Equipos.ToList());
+            return View(db.Usuarios.ToList());
         }
 
-        // GET: Equipos/Details/5
+        // GET: Usuarios/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipos equipos = db.Equipos.Find(id);
-            if (equipos == null)
+            Usuarios usuarios = db.Usuarios.Find(id);
+            if (usuarios == null)
             {
                 return HttpNotFound();
             }
-            return View(equipos);
+            return View(usuarios);
         }
 
-        // GET: Equipos/Create
+        // GET: Usuarios/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Equipos/Create
+        // POST: Usuarios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdEquipo,Folio,Garantia,Equipo,Estado,Presupuesto,Diagnostico,Contacto,Tecnico,FechaIn,FechaOut,TipoEquipo,Ubicacion")] Equipos equipos)
+        public ActionResult Create(UsuariosViewModel usuario)
         {
             if (ModelState.IsValid)
             {
-                db.Equipos.Add(equipos);
-                db.SaveChanges();
+               
+              //db.Usuarios.Add(usuarios);
+                //    db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(equipos);
+            return View(usuario);
         }
 
-        // GET: Equipos/Edit/5
+        // GET: Usuarios/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipos equipos = db.Equipos.Find(id);
-            if (equipos == null)
+            Usuarios usuarios = db.Usuarios.Find(id);
+            if (usuarios == null)
             {
                 return HttpNotFound();
             }
-            return View(equipos);
+            return View(usuarios);
         }
 
-        // POST: Equipos/Edit/5
+        // POST: Usuarios/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdEquipo,Folio,Garantia,Equipo,Estado,Presupuesto,Diagnostico,Contacto,Tecnico,FechaIn,FechaOut,TipoEquipo,Ubicacion")] Equipos equipos)
+        public ActionResult Edit([Bind(Include = "id_user,id_AspUser,Nombre,ApellidoP,ApellidoM,codigo_empleado,sexo,estatus")] Usuarios usuarios)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(equipos).State = EntityState.Modified;
+                db.Entry(usuarios).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(equipos);
+            return View(usuarios);
         }
 
-        // GET: Equipos/Delete/5
+        // GET: Usuarios/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Equipos equipos = db.Equipos.Find(id);
-            if (equipos == null)
+            Usuarios usuarios = db.Usuarios.Find(id);
+            if (usuarios == null)
             {
                 return HttpNotFound();
             }
-            return View(equipos);
+            return View(usuarios);
         }
 
-        // POST: Equipos/Delete/5
+        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Equipos equipos = db.Equipos.Find(id);
-            db.Equipos.Remove(equipos);
+            Usuarios usuarios = db.Usuarios.Find(id);
+            db.Usuarios.Remove(usuarios);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -202,11 +202,11 @@
     <Compile Include="Controllers\AsesoresTbsController.cs" />
     <Compile Include="Controllers\AsesoriasTbsController.cs" />
     <Compile Include="Controllers\carrerasController.cs" />
-    <Compile Include="Controllers\EquiposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MateriasTbsController.cs" />
     <Compile Include="Controllers\temasTbsController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,24 +238,6 @@
     <Compile Include="Models\carreras.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\equipos.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>equipos.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Equipos.cs">
-      <DependentUpon>equipos.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\equipos.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>equipos.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\equipos1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>equipos.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MateriasTb.cs">
@@ -267,9 +249,13 @@
     <Compile Include="Models\temasTb.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Usuarios.cs">
+      <DependentUpon>AsesoriasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AsesoriaModelView.cs" />
+    <Compile Include="ViewModels\UsuariosViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\adminlte.css" />
@@ -329,16 +315,6 @@
       <DependentUpon>AsesoriasModel.edmx</DependentUpon>
       <LastGenOutput>AsesoriasModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\equipos.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>equipos.edmx</DependentUpon>
-      <LastGenOutput>equipos.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\equipos.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>equipos.edmx</DependentUpon>
-      <LastGenOutput>equipos1.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\adminlte\adminlte.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -359,13 +335,6 @@
     <Content Include="Content\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome\webfonts\fa-solid-900.woff2" />
-    <EntityDeploy Include="Models\equipos.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>equipos.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\equipos.edmx.diagram">
-      <DependentUpon>equipos.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\dist\css\adminlte.css.map" />
     <Content Include="Content\dist\css\adminlte.min.css.map" />
     <Content Include="Content\dist\js\adminlte.js.map" />
@@ -381,6 +350,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\custom\lstAsesoria.js" />
     <Content Include="Scripts\custom\modal.js" />
+    <Content Include="Scripts\custom\Users.js" />
     <Content Include="Scripts\fastclick\fastclick.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -464,6 +434,11 @@
     <Content Include="Views\temasTbs\Details.cshtml" />
     <Content Include="Views\temasTbs\Edit.cshtml" />
     <Content Include="Views\temasTbs\Index.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

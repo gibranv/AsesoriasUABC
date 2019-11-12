@@ -42,11 +42,6 @@ namespace AsesoriasUABC
             bundles.Add(new StyleBundle("~/Content/css/tables")
              .Include("~/Content/dataTables/dataTables.bootstrap4.css"));
 
-            //bundles.Add(new StyleBundle("~/Content/css").Include(
-            //          "~/Content/adminlte.css",
-            //           "~/Content/fontawesome/css/all.css",
-            //          "~/Content/all.css"
-            //          ));
 
             bundles.Add(new StyleBundle("~/Content/css")
                 .Include(

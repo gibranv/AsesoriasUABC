@@ -75,6 +75,19 @@
           <Property Name="nombre_tema" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="id_Materias" Type="int" />
         </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_AspUser" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ApellidoP" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ApellidoM" Type="nvarchar" MaxLength="20" />
+          <Property Name="codigo_empleado" Type="int" Nullable="false" />
+          <Property Name="sexo" Type="nchar" MaxLength="10" />
+          <Property Name="estatus" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_AsesoriasTb_AsesoresTb">
           <End Role="AsesoresTb" Type="Self.AsesoresTb" Multiplicity="0..1" />
           <End Role="AsesoriasTb" Type="Self.AsesoriasTb" Multiplicity="*" />
@@ -119,6 +132,7 @@
           <EntitySet Name="Materias_Asesores" EntityType="Self.Materias_Asesores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="temasTb" EntityType="Self.temasTb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AsesoriasTb_AsesoresTb" Association="Self.FK_AsesoriasTb_AsesoresTb">
             <End Role="AsesoresTb" EntitySet="AsesoresTb" />
             <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
@@ -216,6 +230,7 @@
             <End Role="temasTb" EntitySet="temasTb" />
           </AssociationSet>
           <EntitySet Name="Materias_Asesores" EntityType="DBAsesoriasFIADModel.Materias_Asesores" />
+          <EntitySet Name="Usuarios" EntityType="DBAsesoriasFIADModel.Usuarios" />
         </EntityContainer>
         <EntityType Name="carreras">
           <Key>
@@ -268,6 +283,19 @@
           <Property Name="id_materia" Type="Int32" Nullable="false" />
           <Property Name="id_Asesores" Type="Int32" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_AspUser" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoP" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="codigo_empleado" Type="Int32" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="estatus" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -349,6 +377,20 @@
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id_Asesores" ColumnName="id_Asesores" />
                 <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="codigo_empleado" ColumnName="codigo_empleado" />
+                <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+                <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="id_AspUser" ColumnName="id_AspUser" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -80,6 +80,7 @@
       <End Role="temasTb" EntitySet="temasTb" />
     </AssociationSet>
     <EntitySet Name="Materias_Asesores" EntityType="DBAsesoriasFIADModel.Materias_Asesores" />
+    <EntitySet Name="Usuarios" EntityType="DBAsesoriasFIADModel.Usuarios" />
   </EntityContainer>
   <EntityType Name="carreras">
     <Key>
@@ -132,5 +133,18 @@
     <Property Name="id_materia" Type="Int32" Nullable="false" />
     <Property Name="id_Asesores" Type="Int32" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_AspUser" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ApellidoP" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ApellidoM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="codigo_empleado" Type="Int32" Nullable="false" />
+    <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="estatus" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

@@ -75,7 +75,7 @@
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" />
+                                <input type="submit" value="Create" id="Create" class="btn btn-default" />
                             </div>
                         </div>
                     </div>
@@ -130,11 +130,7 @@
         var now = new Date(Date.now())
         $("#fecha").val(now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear())
         $("#fecha").prop("disabled", true)
-        $('#mtr').click(function () {
-            if ($("#matricula").val() != "") {
-                GetAlumno($("#matricula").val());
-            }
-        });+
+       
         $("#Materia").prop("disabled", true)
         $("#Tema").prop("disabled", true)
         $("#Asesor").prop("disabled", true)
@@ -143,8 +139,17 @@
 
     $("#Materia").change(function () {
         var id_materia = $("#Materia").val()
-        console.log(id_materia)
+    
         LstMateriasAsesores(id_materia)
+    });
+    $('#mtr').click(function () {
+        if ($("#matricula").val() != "") {
+            GetAlumno($("#matricula").val());
+           
+        }
+    });
+    $('#Create').click(function () {
+        console.log($("#matricula").val())
     });
     //$("#Materia").change(function () {
         
@@ -182,7 +187,7 @@
                 }
                 $("#Asesor").append(options)
                 $("#Asesor").removeAttr("disabled")
-
+       
             },
             error: function (result) {
             }
@@ -192,11 +197,11 @@
             $("#Lbmateria").show();
         }
     }
+
     function GetAlumno(matricula) {
         $.ajaxSetup({ cache: false });
         if(true){
 
-        
         $.ajax({
             url: '@Url.Action("FindAlumno", "AsesoriasTbs")',
             data: {
@@ -210,7 +215,7 @@
                     $("#Carrera").val(response.carrera);
                     $("#Carrera").disabled = true;
                     $("#Nombre").disabled = true;
-                    $("#matricula").prop("disabled", true)
+                    //$("#matricula").prop("disabled", true)
                     $("#Materia").removeAttr('disabled');
                     $("#LbErrormatricula").show();
         }else{

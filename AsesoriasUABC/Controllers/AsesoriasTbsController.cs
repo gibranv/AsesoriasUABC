@@ -65,8 +65,8 @@ namespace AsesoriasUABC.Controllers
             ViewBag.LstTema = new SelectList(lstTemas, "id_Temas", "nombre_tema");
             ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
 
-          //  if (ModelState.IsValid)
-          //  {
+            if (ModelState.IsValid)
+            {
                 AsesoriasTb dbase = new AsesoriasTb();
                 dbase.cvc = ase.cvc.ToString();
                 dbase.matricula = ase.matricula;
@@ -76,7 +76,7 @@ namespace AsesoriasUABC.Controllers
                 db.AsesoriasTb.Add(dbase);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-           // }
+           }
 
            return View(ase);
         }

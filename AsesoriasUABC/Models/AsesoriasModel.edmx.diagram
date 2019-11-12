@@ -15,6 +15,7 @@
         <AssociationConnector Association="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb" />
         <AssociationConnector Association="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" />
         <EntityTypeShape EntityType="DBAsesoriasFIADModel.Materias_Asesores" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.Usuarios" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
