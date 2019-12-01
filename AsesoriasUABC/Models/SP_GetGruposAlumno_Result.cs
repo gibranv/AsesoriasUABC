@@ -10,15 +10,11 @@
 namespace AsesoriasUABC.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class temasTb
+    public partial class SP_GetGruposAlumno_Result
     {
-        public int id_Temas { get; set; }
-        public string numero_tema { get; set; }
-        public string nombre_tema { get; set; }
-        public Nullable<int> id_Materias { get; set; }
-    
-        public virtual MateriasTb MateriasTb { get; set; }
+        public int id_grupo { get; set; }
+        public Nullable<int> id_carrera { get; set; }
+        public Nullable<int> num_grupo { get; set; }
     }
 }

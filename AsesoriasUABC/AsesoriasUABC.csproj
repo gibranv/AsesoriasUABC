@@ -214,6 +214,9 @@
     <Compile Include="Models\AlumnosTb.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Alumnos_Grupos.cs">
+      <DependentUpon>AsesoriasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AsesoresTb.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
@@ -238,12 +241,25 @@
     <Compile Include="Models\carreras.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Constants.cs" />
+    <Compile Include="Models\Grupos.cs">
+      <DependentUpon>AsesoriasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MateriasTb.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Materias_Asesores.cs">
+    <Compile Include="Models\Materias_Grupos.cs">
+      <DependentUpon>AsesoriasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetAsesoresTemas_Result.cs">
+      <DependentUpon>AsesoriasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetGruposAlumno_Result.cs">
+      <DependentUpon>AsesoriasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sp_GetMateriasGrupo_Result.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\temasTb.cs">

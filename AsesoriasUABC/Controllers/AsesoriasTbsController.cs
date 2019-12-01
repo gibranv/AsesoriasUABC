@@ -44,10 +44,11 @@ namespace AsesoriasUABC.Controllers
             List<MateriasTb> lstMaterias = db.MateriasTb.ToList();
             List<temasTb> lstTemas = db.temasTb.ToList();
             List<AsesoresTb> lstAsesores = db.AsesoresTb.ToList();
-            
+            List<Grupos> lstGrupos = db.Grupos.ToList();
             ViewBag.LstMateria = new SelectList(lstMaterias, "id_materia", "nombre");
             ViewBag.LstTema = new SelectList(lstTemas, "id_Temas", "nombre_tema");
             ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
+            ViewBag.Grupo = new SelectList(lstGrupos, "id_grupo", "num_grupo");
             return View();
         }
 
@@ -116,11 +117,14 @@ namespace AsesoriasUABC.Controllers
         {
             int matricula = Convert.ToInt32(m);
             AlumnosTb alumno = new AlumnosTb();
-            var result = new {status = "Not Find",name="",carrera=0};
+            var result = new {status = "Not Find",name="", lstGrupos = new SelectList("","")};
             alumno = db.AlumnosTb.Where(i => i.matricula == matricula).FirstOrDefault();
-            if(alumno != null)
+            
+            if (alumno != null)
             {
-                result = new { status = "Succes", name = alumno.nombre +" "+ alumno.apellidoP +" "+ alumno.apellidoM, carrera = alumno.idCarrera };
+                         
+                SelectList lstGrupos = new SelectList(db.SP_GetGruposAlumno(alumno.id_Alumno), "id_Temas", "nombre_tema");
+                result = new { status = "Succes", name = alumno.nombre +" "+ alumno.apellidoP +" "+ alumno.apellidoM, lstGrupos };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -140,14 +144,26 @@ namespace AsesoriasUABC.Controllers
 
             return Json(JsonRequestBehavior.AllowGet);
         }
+
         // GET: AsesoriasTbs/Delete/5
-        public ActionResult LstMaterias(string _id_materia)
+        public ActionResult LstTemasAsesor(string _id_materia)
         {
-            var id_materia = Convert.ToInt64(_id_materia) ;
-            SelectList lstTemas = new SelectList(db.temasTb.Where(i => i.id_Materias == id_materia).ToList(), "id_Temas", "nombre_tema");
-            SelectList lstAsesores = new SelectList(db.Materias_Asesores.Where( i => i.id_materia == id_materia ).ToList(), "Id_Asesores", "nombre");
+            var id_materia = Convert.ToInt32(_id_materia);
+
+            var dbresult = db.SP_GetAsesoresTemas(id_materia);
+            
+            SelectList lstTemas = new SelectList(dbresult,"Id_Temas","nombre_tema");
+            SelectList lstAsesores = new SelectList(dbresult, "Id_Asesores", "nombre");
             var result = new { lstTemas, lstAsesores };
-          //  ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
+            //  ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
+            return Json(result);
+        }
+        public ActionResult LstMaterias(string _id_Grupo)
+        {
+            int id_grupo = Convert.ToInt32(_id_Grupo);
+            var result = new { status = "Not Find", lstMaterias = new SelectList("", "") };
+            SelectList lstMaterias = new SelectList(db.Sp_GetMateriasGrupo(id_grupo), "id_materia", "nombre");
+            result = new { status = "", lstMaterias };
             return Json(result);
         }
         public ActionResult Delete(int? id)

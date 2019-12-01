@@ -12,6 +12,8 @@ namespace AsesoriasUABC.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DBAsesoriasFIADEntities : DbContext
     {
@@ -25,13 +27,42 @@ namespace AsesoriasUABC.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<Alumnos_Grupos> Alumnos_Grupos { get; set; }
         public virtual DbSet<AlumnosTb> AlumnosTb { get; set; }
         public virtual DbSet<AsesoresTb> AsesoresTb { get; set; }
         public virtual DbSet<AsesoriasTb> AsesoriasTb { get; set; }
+        public virtual DbSet<carreras> carreras { get; set; }
+        public virtual DbSet<Grupos> Grupos { get; set; }
+        public virtual DbSet<Materias_Grupos> Materias_Grupos { get; set; }
         public virtual DbSet<MateriasTb> MateriasTb { get; set; }
         public virtual DbSet<temasTb> temasTb { get; set; }
-        public virtual DbSet<carreras> carreras { get; set; }
-        public virtual DbSet<Materias_Asesores> Materias_Asesores { get; set; }
-        public virtual DbSet<Usuarios> Usuarios { get; set; }
+    
+        public virtual ObjectResult<SP_GetGruposAlumno_Result> SP_GetGruposAlumno(Nullable<int> id_alumno)
+        {
+            var id_alumnoParameter = id_alumno.HasValue ?
+                new ObjectParameter("id_alumno", id_alumno) :
+                new ObjectParameter("id_alumno", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetGruposAlumno_Result>("SP_GetGruposAlumno", id_alumnoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_GetMateriasGrupo_Result> Sp_GetMateriasGrupo(Nullable<int> id_grupo)
+        {
+            var id_grupoParameter = id_grupo.HasValue ?
+                new ObjectParameter("id_grupo", id_grupo) :
+                new ObjectParameter("id_grupo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetMateriasGrupo_Result>("Sp_GetMateriasGrupo", id_grupoParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetAsesoresTemas_Result> SP_GetAsesoresTemas(Nullable<int> id_materia)
+        {
+            var id_materiaParameter = id_materia.HasValue ?
+                new ObjectParameter("id_materia", id_materia) :
+                new ObjectParameter("id_materia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAsesoresTemas_Result>("SP_GetAsesoresTemas", id_materiaParameter);
+        }
     }
 }

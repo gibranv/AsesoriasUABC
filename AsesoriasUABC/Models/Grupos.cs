@@ -12,26 +12,23 @@ namespace AsesoriasUABC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AsesoresTb
+    public partial class Grupos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AsesoresTb()
+        public Grupos()
         {
-            this.AsesoriasTb = new HashSet<AsesoriasTb>();
             this.Materias_Grupos = new HashSet<Materias_Grupos>();
+            this.Alumnos_Grupos = new HashSet<Alumnos_Grupos>();
         }
     
-        public int Id_Asesores { get; set; }
-        public string nombre { get; set; }
-        public string ApellidoP { get; set; }
-        public int codigo_empleado { get; set; }
-        public string correo { get; set; }
-        public string sexo { get; set; }
-        public string ApellidoM { get; set; }
+        public int id_grupo { get; set; }
+        public Nullable<int> id_carrera { get; set; }
+        public Nullable<int> num_grupo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AsesoriasTb> AsesoriasTb { get; set; }
+        public virtual carreras carreras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Materias_Grupos> Materias_Grupos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alumnos_Grupos> Alumnos_Grupos { get; set; }
     }
 }

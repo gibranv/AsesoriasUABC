@@ -14,8 +14,17 @@ namespace AsesoriasUABC.Models
     
     public partial class carreras
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public carreras()
+        {
+            this.Grupos = new HashSet<Grupos>();
+        }
+    
         public int id_carrera { get; set; }
         public int codigo { get; set; }
         public string nombre { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Grupos> Grupos { get; set; }
     }
 }

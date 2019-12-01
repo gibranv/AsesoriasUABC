@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBAsesoriasFIADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumnos_Grupos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_alumno" Type="int" Nullable="false" />
+          <Property Name="id_grupo" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="AlumnosTb">
           <Key>
             <PropertyRef Name="id_Alumno" />
@@ -13,9 +21,8 @@
           <Property Name="matricula" Type="int" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="apellidoP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sexo" Type="nchar" MaxLength="10" />
           <Property Name="apellidoM" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="idCarrera" Type="int" Nullable="false" />
-          <Property Name="grupo" Type="int" />
         </EntityType>
         <EntityType Name="AsesoresTb">
           <Key>
@@ -26,7 +33,6 @@
           <Property Name="ApellidoP" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="codigo_empleado" Type="int" Nullable="false" />
           <Property Name="correo" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="contraseña" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="sexo" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="ApellidoM" Type="nvarchar" MaxLength="40" />
         </EntityType>
@@ -49,13 +55,22 @@
           <Property Name="codigo" Type="int" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Materias_Asesores">
+        <EntityType Name="Grupos">
           <Key>
-            <PropertyRef Name="id_materia" />
+            <PropertyRef Name="id_grupo" />
+          </Key>
+          <Property Name="id_grupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_carrera" Type="int" />
+          <Property Name="num_grupo" Type="int" />
+        </EntityType>
+        <EntityType Name="Materias_Grupos">
+          <Key>
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="id_materia" Type="int" Nullable="false" />
-          <Property Name="id_Asesores" Type="int" />
-          <Property Name="nombre" Type="nchar" MaxLength="50" />
+          <Property Name="id_grupo" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_asesor" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MateriasTb">
           <Key>
@@ -64,14 +79,14 @@
           <Property Name="id_materia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="clave_materia" Type="int" Nullable="false" />
-          <Property Name="plan_estudios" Type="int" Nullable="false" />
+          <Property Name="plan_estudios" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="temasTb">
           <Key>
             <PropertyRef Name="id_Temas" />
           </Key>
           <Property Name="id_Temas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="numero_tema" Type="int" Nullable="false" />
+          <Property Name="numero_tema" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="nombre_tema" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="id_Materias" Type="int" />
         </EntityType>
@@ -88,6 +103,30 @@
           <Property Name="sexo" Type="nchar" MaxLength="10" />
           <Property Name="estatus" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Alumnos_Grupos_AlumnosTb">
+          <End Role="AlumnosTb" Type="Self.AlumnosTb" Multiplicity="1" />
+          <End Role="Alumnos_Grupos" Type="Self.Alumnos_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlumnosTb">
+              <PropertyRef Name="id_Alumno" />
+            </Principal>
+            <Dependent Role="Alumnos_Grupos">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alumnos_Grupos_Grupos">
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
+          <End Role="Alumnos_Grupos" Type="Self.Alumnos_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Principal>
+            <Dependent Role="Alumnos_Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AsesoriasTb_AsesoresTb">
           <End Role="AsesoresTb" Type="Self.AsesoresTb" Multiplicity="0..1" />
           <End Role="AsesoriasTb" Type="Self.AsesoriasTb" Multiplicity="*" />
@@ -112,6 +151,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Grupos_carreras">
+          <End Role="carreras" Type="Self.carreras" Multiplicity="0..1" />
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carreras">
+              <PropertyRef Name="id_carrera" />
+            </Principal>
+            <Dependent Role="Grupos">
+              <PropertyRef Name="id_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupos_Grupos">
+          <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
+          <End Role="Materias_Grupos" Type="Self.Materias_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Principal>
+            <Dependent Role="Materias_Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materias_Grupos_AsesoresTb">
+          <End Role="AsesoresTb" Type="Self.AsesoresTb" Multiplicity="1" />
+          <End Role="Materias_Grupos" Type="Self.Materias_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AsesoresTb">
+              <PropertyRef Name="Id_Asesores" />
+            </Principal>
+            <Dependent Role="Materias_Grupos">
+              <PropertyRef Name="id_asesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materias_Grupos_MateriasTb">
+          <End Role="MateriasTb" Type="Self.MateriasTb" Multiplicity="1" />
+          <End Role="Materias_Grupos" Type="Self.Materias_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MateriasTb">
+              <PropertyRef Name="id_materia" />
+            </Principal>
+            <Dependent Role="Materias_Grupos">
+              <PropertyRef Name="id_materia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_temasTb_MateriasTb">
           <End Role="MateriasTb" Type="Self.MateriasTb" Multiplicity="0..1" />
           <End Role="temasTb" Type="Self.temasTb" Multiplicity="*" />
@@ -124,15 +211,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_GetAsesoresTemas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_materia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GetGruposAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_alumno" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_GetMateriasGrupo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_grupo" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DBAsesoriasFIADModelStoreContainer">
+          <EntitySet Name="Alumnos_Grupos" EntityType="Self.Alumnos_Grupos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlumnosTb" EntityType="Self.AlumnosTb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AsesoresTb" EntityType="Self.AsesoresTb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AsesoriasTb" EntityType="Self.AsesoriasTb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="carreras" EntityType="Self.carreras" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Materias_Asesores" EntityType="Self.Materias_Asesores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grupos" EntityType="Self.Grupos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materias_Grupos" EntityType="Self.Materias_Grupos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="temasTb" EntityType="Self.temasTb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Alumnos_Grupos_AlumnosTb" Association="Self.FK_Alumnos_Grupos_AlumnosTb">
+            <End Role="AlumnosTb" EntitySet="AlumnosTb" />
+            <End Role="Alumnos_Grupos" EntitySet="Alumnos_Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumnos_Grupos_Grupos" Association="Self.FK_Alumnos_Grupos_Grupos">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="Alumnos_Grupos" EntitySet="Alumnos_Grupos" />
+          </AssociationSet>
           <AssociationSet Name="FK_AsesoriasTb_AsesoresTb" Association="Self.FK_AsesoriasTb_AsesoresTb">
             <End Role="AsesoresTb" EntitySet="AsesoresTb" />
             <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
@@ -140,6 +246,22 @@
           <AssociationSet Name="FK_AsesoriasTb_MateriasTb" Association="Self.FK_AsesoriasTb_MateriasTb">
             <End Role="MateriasTb" EntitySet="MateriasTb" />
             <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupos_carreras" Association="Self.FK_Grupos_carreras">
+            <End Role="carreras" EntitySet="carreras" />
+            <End Role="Grupos" EntitySet="Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupos_Grupos" Association="Self.FK_Grupos_Grupos">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="Materias_Grupos" EntitySet="Materias_Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materias_Grupos_AsesoresTb" Association="Self.FK_Materias_Grupos_AsesoresTb">
+            <End Role="AsesoresTb" EntitySet="AsesoresTb" />
+            <End Role="Materias_Grupos" EntitySet="Materias_Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materias_Grupos_MateriasTb" Association="Self.FK_Materias_Grupos_MateriasTb">
+            <End Role="MateriasTb" EntitySet="MateriasTb" />
+            <End Role="Materias_Grupos" EntitySet="Materias_Grupos" />
           </AssociationSet>
           <AssociationSet Name="FK_temasTb_MateriasTb" Association="Self.FK_temasTb_MateriasTb">
             <End Role="MateriasTb" EntitySet="MateriasTb" />
@@ -150,31 +272,111 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBAsesoriasFIADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBAsesoriasFIADEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Usuarios" EntityType="DBAsesoriasFIADModel.Usuarios" />
+          <EntitySet Name="Alumnos_Grupos" EntityType="DBAsesoriasFIADModel.Alumnos_Grupos" />
+          <EntitySet Name="AlumnosTb" EntityType="DBAsesoriasFIADModel.AlumnosTb" />
+          <EntitySet Name="AsesoresTb" EntityType="DBAsesoriasFIADModel.AsesoresTb" />
+          <EntitySet Name="AsesoriasTb" EntityType="DBAsesoriasFIADModel.AsesoriasTb" />
+          <EntitySet Name="carreras" EntityType="DBAsesoriasFIADModel.carreras" />
+          <EntitySet Name="Grupos" EntityType="DBAsesoriasFIADModel.Grupos" />
+          <EntitySet Name="Materias_Grupos" EntityType="DBAsesoriasFIADModel.Materias_Grupos" />
+          <EntitySet Name="MateriasTb" EntityType="DBAsesoriasFIADModel.MateriasTb" />
+          <EntitySet Name="temasTb" EntityType="DBAsesoriasFIADModel.temasTb" />
+          <AssociationSet Name="FK_AsesoriasTb_AsesoresTb" Association="DBAsesoriasFIADModel.FK_AsesoriasTb_AsesoresTb">
+            <End Role="AsesoresTb" EntitySet="AsesoresTb" />
+            <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AsesoriasTb_MateriasTb" Association="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb">
+            <End Role="MateriasTb" EntitySet="MateriasTb" />
+            <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupos_carreras" Association="DBAsesoriasFIADModel.FK_Grupos_carreras">
+            <End Role="carreras" EntitySet="carreras" />
+            <End Role="Grupos" EntitySet="Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupos_Grupos" Association="DBAsesoriasFIADModel.FK_Grupos_Grupos">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="Materias_Grupos" EntitySet="Materias_Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materias_Grupos_MateriasTb" Association="DBAsesoriasFIADModel.FK_Materias_Grupos_MateriasTb">
+            <End Role="MateriasTb" EntitySet="MateriasTb" />
+            <End Role="Materias_Grupos" EntitySet="Materias_Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_temasTb_MateriasTb" Association="DBAsesoriasFIADModel.FK_temasTb_MateriasTb">
+            <End Role="MateriasTb" EntitySet="MateriasTb" />
+            <End Role="temasTb" EntitySet="temasTb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumnos_Grupos_AlumnosTb" Association="DBAsesoriasFIADModel.FK_Alumnos_Grupos_AlumnosTb">
+            <End Role="AlumnosTb" EntitySet="AlumnosTb" />
+            <End Role="Alumnos_Grupos" EntitySet="Alumnos_Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumnos_Grupos_Grupos" Association="DBAsesoriasFIADModel.FK_Alumnos_Grupos_Grupos">
+            <End Role="Grupos" EntitySet="Grupos" />
+            <End Role="Alumnos_Grupos" EntitySet="Alumnos_Grupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materias_Grupos_AsesoresTb" Association="DBAsesoriasFIADModel.FK_Materias_Grupos_AsesoresTb">
+            <End Role="AsesoresTb" EntitySet="AsesoresTb" />
+            <End Role="Materias_Grupos" EntitySet="Materias_Grupos" />
+          </AssociationSet>
+          <FunctionImport Name="SP_GetGruposAlumno" ReturnType="Collection(DBAsesoriasFIADModel.SP_GetGruposAlumno_Result)">
+          <Parameter Name="id_alumno" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_GetMateriasGrupo" ReturnType="Collection(DBAsesoriasFIADModel.Sp_GetMateriasGrupo_Result)">
+          <Parameter Name="id_grupo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetAsesoresTemas" ReturnType="Collection(DBAsesoriasFIADModel.SP_GetAsesoresTemas_Result)">
+            <Parameter Name="id_materia" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_AspUser" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoP" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="codigo_empleado" Type="Int32" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="estatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Alumnos_Grupos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_alumno" Type="Int32" Nullable="false" />
+          <Property Name="id_grupo" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AlumnosTb" Relationship="DBAsesoriasFIADModel.FK_Alumnos_Grupos_AlumnosTb" FromRole="Alumnos_Grupos" ToRole="AlumnosTb" />
+          <NavigationProperty Name="Grupos" Relationship="DBAsesoriasFIADModel.FK_Alumnos_Grupos_Grupos" FromRole="Alumnos_Grupos" ToRole="Grupos" />
+        </EntityType>
         <EntityType Name="AlumnosTb">
           <Key>
             <PropertyRef Name="id_Alumno" />
           </Key>
           <Property Name="id_Alumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="matricula" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="apellidoP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="apellidoM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="idCarrera" Type="Int32" Nullable="false" />
-          <Property Name="grupo" Type="Int32" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellidoP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="apellidoM" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Alumnos_Grupos" Relationship="DBAsesoriasFIADModel.FK_Alumnos_Grupos_AlumnosTb" FromRole="AlumnosTb" ToRole="Alumnos_Grupos" />
         </EntityType>
         <EntityType Name="AsesoresTb">
           <Key>
             <PropertyRef Name="Id_Asesores" />
           </Key>
           <Property Name="Id_Asesores" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ApellidoP" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoP" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="codigo_empleado" Type="Int32" Nullable="false" />
-          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="correo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sexo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="ApellidoM" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AsesoriasTb" Relationship="DBAsesoriasFIADModel.FK_AsesoriasTb_AsesoresTb" FromRole="AsesoresTb" ToRole="AsesoriasTb" />
+          <NavigationProperty Name="Materias_Grupos" Relationship="DBAsesoriasFIADModel.FK_Materias_Grupos_AsesoresTb" FromRole="AsesoresTb" ToRole="Materias_Grupos" />
         </EntityType>
         <EntityType Name="AsesoriasTb">
           <Key>
@@ -189,49 +391,6 @@
           <NavigationProperty Name="AsesoresTb" Relationship="DBAsesoriasFIADModel.FK_AsesoriasTb_AsesoresTb" FromRole="AsesoriasTb" ToRole="AsesoresTb" />
           <NavigationProperty Name="MateriasTb" Relationship="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb" FromRole="AsesoriasTb" ToRole="MateriasTb" />
         </EntityType>
-        <EntityType Name="MateriasTb">
-          <Key>
-            <PropertyRef Name="id_materia" />
-          </Key>
-          <Property Name="id_materia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="clave_materia" Type="Int32" Nullable="false" />
-          <Property Name="plan_estudios" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AsesoriasTb" Relationship="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb" FromRole="MateriasTb" ToRole="AsesoriasTb" />
-          <NavigationProperty Name="temasTb" Relationship="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" FromRole="MateriasTb" ToRole="temasTb" />
-        </EntityType>
-        <EntityType Name="temasTb">
-          <Key>
-            <PropertyRef Name="id_Temas" />
-          </Key>
-          <Property Name="id_Temas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="numero_tema" Type="Int32" Nullable="false" />
-          <Property Name="nombre_tema" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id_Materias" Type="Int32" />
-          <NavigationProperty Name="MateriasTb" Relationship="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" FromRole="temasTb" ToRole="MateriasTb" />
-        </EntityType>
-        <EntityContainer Name="DBAsesoriasFIADEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AlumnosTb" EntityType="Self.AlumnosTb" />
-          <EntitySet Name="AsesoresTb" EntityType="Self.AsesoresTb" />
-          <EntitySet Name="AsesoriasTb" EntityType="Self.AsesoriasTb" />
-          <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" />
-          <EntitySet Name="temasTb" EntityType="Self.temasTb" />
-          <EntitySet Name="carreras" EntityType="DBAsesoriasFIADModel.carreras" />
-          <AssociationSet Name="FK_AsesoriasTb_AsesoresTb" Association="DBAsesoriasFIADModel.FK_AsesoriasTb_AsesoresTb">
-            <End Role="AsesoresTb" EntitySet="AsesoresTb" />
-            <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AsesoriasTb_MateriasTb" Association="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb">
-            <End Role="MateriasTb" EntitySet="MateriasTb" />
-            <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
-          </AssociationSet>
-          <AssociationSet Name="FK_temasTb_MateriasTb" Association="DBAsesoriasFIADModel.FK_temasTb_MateriasTb">
-            <End Role="MateriasTb" EntitySet="MateriasTb" />
-            <End Role="temasTb" EntitySet="temasTb" />
-          </AssociationSet>
-          <EntitySet Name="Materias_Asesores" EntityType="DBAsesoriasFIADModel.Materias_Asesores" />
-          <EntitySet Name="Usuarios" EntityType="DBAsesoriasFIADModel.Usuarios" />
-        </EntityContainer>
         <EntityType Name="carreras">
           <Key>
             <PropertyRef Name="id_carrera" />
@@ -239,6 +398,52 @@
           <Property Name="id_carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codigo" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Grupos" Relationship="DBAsesoriasFIADModel.FK_Grupos_carreras" FromRole="carreras" ToRole="Grupos" />
+        </EntityType>
+        <EntityType Name="Grupos">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+          </Key>
+          <Property Name="id_grupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_carrera" Type="Int32" />
+          <Property Name="num_grupo" Type="Int32" />
+          <NavigationProperty Name="carreras" Relationship="DBAsesoriasFIADModel.FK_Grupos_carreras" FromRole="Grupos" ToRole="carreras" />
+          <NavigationProperty Name="Materias_Grupos" Relationship="DBAsesoriasFIADModel.FK_Grupos_Grupos" FromRole="Grupos" ToRole="Materias_Grupos" />
+          <NavigationProperty Name="Alumnos_Grupos" Relationship="DBAsesoriasFIADModel.FK_Alumnos_Grupos_Grupos" FromRole="Grupos" ToRole="Alumnos_Grupos" />
+        </EntityType>
+        <EntityType Name="Materias_Grupos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_materia" Type="Int32" Nullable="false" />
+          <Property Name="id_grupo" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Grupos" Relationship="DBAsesoriasFIADModel.FK_Grupos_Grupos" FromRole="Materias_Grupos" ToRole="Grupos" />
+          <NavigationProperty Name="MateriasTb" Relationship="DBAsesoriasFIADModel.FK_Materias_Grupos_MateriasTb" FromRole="Materias_Grupos" ToRole="MateriasTb" />
+          <Property Name="id_asesor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AsesoresTb" Relationship="DBAsesoriasFIADModel.FK_Materias_Grupos_AsesoresTb" FromRole="Materias_Grupos" ToRole="AsesoresTb" />
+        </EntityType>
+        <EntityType Name="MateriasTb">
+          <Key>
+            <PropertyRef Name="id_materia" />
+          </Key>
+          <Property Name="id_materia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="clave_materia" Type="Int32" Nullable="false" />
+          <Property Name="plan_estudios" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AsesoriasTb" Relationship="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb" FromRole="MateriasTb" ToRole="AsesoriasTb" />
+          <NavigationProperty Name="Materias_Grupos" Relationship="DBAsesoriasFIADModel.FK_Materias_Grupos_MateriasTb" FromRole="MateriasTb" ToRole="Materias_Grupos" />
+          <NavigationProperty Name="temasTb" Relationship="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" FromRole="MateriasTb" ToRole="temasTb" />
+        </EntityType>
+        <EntityType Name="temasTb">
+          <Key>
+            <PropertyRef Name="id_Temas" />
+          </Key>
+          <Property Name="id_Temas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero_tema" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="nombre_tema" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_Materias" Type="Int32" />
+          <NavigationProperty Name="MateriasTb" Relationship="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" FromRole="temasTb" ToRole="MateriasTb" />
         </EntityType>
         <Association Name="FK_AsesoriasTb_AsesoresTb">
           <End Type="DBAsesoriasFIADModel.AsesoresTb" Role="AsesoresTb" Multiplicity="0..1" />
@@ -264,6 +469,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Grupos_carreras">
+          <End Type="DBAsesoriasFIADModel.carreras" Role="carreras" Multiplicity="0..1" />
+          <End Type="DBAsesoriasFIADModel.Grupos" Role="Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carreras">
+              <PropertyRef Name="id_carrera" />
+            </Principal>
+            <Dependent Role="Grupos">
+              <PropertyRef Name="id_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupos_Grupos">
+          <End Type="DBAsesoriasFIADModel.Grupos" Role="Grupos" Multiplicity="1" />
+          <End Type="DBAsesoriasFIADModel.Materias_Grupos" Role="Materias_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Principal>
+            <Dependent Role="Materias_Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materias_Grupos_MateriasTb">
+          <End Type="DBAsesoriasFIADModel.MateriasTb" Role="MateriasTb" Multiplicity="1" />
+          <End Type="DBAsesoriasFIADModel.Materias_Grupos" Role="Materias_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MateriasTb">
+              <PropertyRef Name="id_materia" />
+            </Principal>
+            <Dependent Role="Materias_Grupos">
+              <PropertyRef Name="id_materia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_temasTb_MateriasTb">
           <End Type="DBAsesoriasFIADModel.MateriasTb" Role="MateriasTb" Multiplicity="0..1" />
           <End Type="DBAsesoriasFIADModel.temasTb" Role="temasTb" Multiplicity="*" />
@@ -276,110 +517,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Materias_Asesores">
-          <Key>
-            <PropertyRef Name="id_materia" />
-          </Key>
-          <Property Name="id_materia" Type="Int32" Nullable="false" />
-          <Property Name="id_Asesores" Type="Int32" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Usuarios">
-          <Key>
-            <PropertyRef Name="id_user" />
-          </Key>
-          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_AspUser" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ApellidoP" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ApellidoM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="codigo_empleado" Type="Int32" Nullable="false" />
-          <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="estatus" Type="Int32" Nullable="false" />
-        </EntityType>
+        <Association Name="FK_Alumnos_Grupos_AlumnosTb">
+          <End Type="DBAsesoriasFIADModel.AlumnosTb" Role="AlumnosTb" Multiplicity="1" />
+          <End Type="DBAsesoriasFIADModel.Alumnos_Grupos" Role="Alumnos_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlumnosTb">
+              <PropertyRef Name="id_Alumno" />
+            </Principal>
+            <Dependent Role="Alumnos_Grupos">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alumnos_Grupos_Grupos">
+          <End Type="DBAsesoriasFIADModel.Grupos" Role="Grupos" Multiplicity="1" />
+          <End Type="DBAsesoriasFIADModel.Alumnos_Grupos" Role="Alumnos_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Principal>
+            <Dependent Role="Alumnos_Grupos">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materias_Grupos_AsesoresTb">
+          <End Type="DBAsesoriasFIADModel.AsesoresTb" Role="AsesoresTb" Multiplicity="1" />
+          <End Type="DBAsesoriasFIADModel.Materias_Grupos" Role="Materias_Grupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AsesoresTb">
+              <PropertyRef Name="Id_Asesores" />
+            </Principal>
+            <Dependent Role="Materias_Grupos">
+              <PropertyRef Name="id_asesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_GetGruposAlumno_Result">
+          <Property Type="Int32" Name="id_grupo" Nullable="false" />
+          <Property Type="Int32" Name="id_carrera" Nullable="true" />
+          <Property Type="Int32" Name="num_grupo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_GetMateriasGrupo_Result">
+          <Property Type="Int32" Name="id_materia" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_GetAsesoresTemas_Result">
+          <Property Type="Int32" Name="id_Temas" Nullable="false" />
+          <Property Type="String" Name="nombre_tema" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Id_Asesores" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBAsesoriasFIADModelStoreContainer" CdmEntityContainer="DBAsesoriasFIADEntities">
-          <EntitySetMapping Name="AlumnosTb">
-            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AlumnosTb">
-              <MappingFragment StoreEntitySet="AlumnosTb">
-                <ScalarProperty Name="id_Alumno" ColumnName="id_Alumno" />
-                <ScalarProperty Name="matricula" ColumnName="matricula" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
-                <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
-                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
-                <ScalarProperty Name="grupo" ColumnName="grupo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AsesoresTb">
-            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoresTb">
-              <MappingFragment StoreEntitySet="AsesoresTb">
-                <ScalarProperty Name="Id_Asesores" ColumnName="Id_Asesores" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
-                <ScalarProperty Name="codigo_empleado" ColumnName="codigo_empleado" />
-                <ScalarProperty Name="correo" ColumnName="correo" />
-                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
-                <ScalarProperty Name="sexo" ColumnName="sexo" />
-                <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AsesoriasTb">
-            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoriasTb">
-              <MappingFragment StoreEntitySet="AsesoriasTb">
-                <ScalarProperty Name="Id_asesoria" ColumnName="Id_asesoria" />
-                <ScalarProperty Name="matricula" ColumnName="matricula" />
-                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
-                <ScalarProperty Name="id_asesor" ColumnName="id_asesor" />
-                <ScalarProperty Name="cvc" ColumnName="cvc" />
-                <ScalarProperty Name="time" ColumnName="time" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MateriasTb">
-            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.MateriasTb">
-              <MappingFragment StoreEntitySet="MateriasTb">
-                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="clave_materia" ColumnName="clave_materia" />
-                <ScalarProperty Name="plan_estudios" ColumnName="plan_estudios" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="temasTb">
-            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.temasTb">
-              <MappingFragment StoreEntitySet="temasTb">
-                <ScalarProperty Name="id_Materias" ColumnName="id_Materias" />
-                <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
-                <ScalarProperty Name="numero_tema" ColumnName="numero_tema" />
-                <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="carreras">
-            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.carreras">
-              <MappingFragment StoreEntitySet="carreras">
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Materias_Asesores">
-            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Materias_Asesores">
-              <MappingFragment StoreEntitySet="Materias_Asesores">
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id_Asesores" ColumnName="id_Asesores" />
-                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
@@ -394,6 +588,127 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Alumnos_Grupos">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Alumnos_Grupos">
+              <MappingFragment StoreEntitySet="Alumnos_Grupos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlumnosTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AlumnosTb">
+              <MappingFragment StoreEntitySet="AlumnosTb">
+                <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="matricula" ColumnName="matricula" />
+                <ScalarProperty Name="id_Alumno" ColumnName="id_Alumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AsesoresTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoresTb">
+              <MappingFragment StoreEntitySet="AsesoresTb">
+                <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="codigo_empleado" ColumnName="codigo_empleado" />
+                <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="Id_Asesores" ColumnName="Id_Asesores" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AsesoriasTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoriasTb">
+              <MappingFragment StoreEntitySet="AsesoriasTb">
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="cvc" ColumnName="cvc" />
+                <ScalarProperty Name="id_asesor" ColumnName="id_asesor" />
+                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+                <ScalarProperty Name="matricula" ColumnName="matricula" />
+                <ScalarProperty Name="Id_asesoria" ColumnName="Id_asesoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carreras">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.carreras">
+              <MappingFragment StoreEntitySet="carreras">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grupos">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Grupos">
+              <MappingFragment StoreEntitySet="Grupos">
+                <ScalarProperty Name="num_grupo" ColumnName="num_grupo" />
+                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materias_Grupos">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Materias_Grupos">
+              <MappingFragment StoreEntitySet="Materias_Grupos">
+                <ScalarProperty Name="id_asesor" ColumnName="id_asesor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MateriasTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.MateriasTb">
+              <MappingFragment StoreEntitySet="MateriasTb">
+                <ScalarProperty Name="plan_estudios" ColumnName="plan_estudios" />
+                <ScalarProperty Name="clave_materia" ColumnName="clave_materia" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="temasTb">
+            <EntityTypeMapping TypeName="DBAsesoriasFIADModel.temasTb">
+              <MappingFragment StoreEntitySet="temasTb">
+                <ScalarProperty Name="id_Materias" ColumnName="id_Materias" />
+                <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
+                <ScalarProperty Name="numero_tema" ColumnName="numero_tema" />
+                <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetGruposAlumno" FunctionName="DBAsesoriasFIADModel.Store.SP_GetGruposAlumno">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetGruposAlumno_Result">
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+                <ScalarProperty Name="num_grupo" ColumnName="num_grupo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_GetMateriasGrupo" FunctionName="DBAsesoriasFIADModel.Store.Sp_GetMateriasGrupo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.Sp_GetMateriasGrupo_Result">
+                <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetAsesoresTemas" FunctionName="DBAsesoriasFIADModel.Store.SP_GetAsesoresTemas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetAsesoresTemas_Result">
+                <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
+                <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
+                <ScalarProperty Name="Id_Asesores" ColumnName="Id_Asesores" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

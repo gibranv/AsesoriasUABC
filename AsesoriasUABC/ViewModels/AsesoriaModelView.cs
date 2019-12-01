@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static AsesoriasUABC.Models.Constants;
 
 namespace AsesoriasUABC.ViewModels
 {
@@ -29,8 +30,8 @@ namespace AsesoriasUABC.ViewModels
         [Required(ErrorMessage = "Es necesario agregar carrera")]
         public string Carrera { get; set; }
         [Required(ErrorMessage = "Ingrese un cvc valido")]
-        [Range( 1,3, ErrorMessage = "Ingrese un numero valido entre 1 y 3")]
-        public int cvc { get; set; }
+        [Display(Name = "Cantida de veces cursada")]
+        public Cvc cvc { get; set; }
         [Required(ErrorMessage = "Ingrese un grupo valido")]
         [Range( 100, 999, ErrorMessage = "Ingrese un numero valido")]
         public int Grupo { get; set; }

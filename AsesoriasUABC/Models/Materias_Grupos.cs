@@ -12,13 +12,15 @@ namespace AsesoriasUABC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class temasTb
+    public partial class Materias_Grupos
     {
-        public int id_Temas { get; set; }
-        public string numero_tema { get; set; }
-        public string nombre_tema { get; set; }
-        public Nullable<int> id_Materias { get; set; }
+        public int id_materia { get; set; }
+        public int id_grupo { get; set; }
+        public int id { get; set; }
+        public int id_asesor { get; set; }
     
+        public virtual Grupos Grupos { get; set; }
         public virtual MateriasTb MateriasTb { get; set; }
+        public virtual AsesoresTb AsesoresTb { get; set; }
     }
 }
