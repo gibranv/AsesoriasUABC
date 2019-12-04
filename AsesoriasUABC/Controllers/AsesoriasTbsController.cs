@@ -62,6 +62,8 @@ namespace AsesoriasUABC.Controllers
             List<MateriasTb> lstMaterias = db.MateriasTb.ToList();
             List<temasTb> lstTemas = db.temasTb.ToList();
             List<AsesoresTb> lstAsesores = db.AsesoresTb.ToList();
+            List<Grupos> lstGrupos = db.Grupos.ToList();
+            ViewBag.Grupo = new SelectList(lstGrupos, "id_grupo", "num_grupo");
             ViewBag.LstMateria = new SelectList(lstMaterias, "id_materia", "nombre");
             ViewBag.LstTema = new SelectList(lstTemas, "id_Temas", "nombre_tema");
             ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
@@ -69,17 +71,16 @@ namespace AsesoriasUABC.Controllers
             if (ModelState.IsValid)
             {
                 AsesoriasTb dbase = new AsesoriasTb();
-                dbase.cvc = ase.cvc.ToString();
+                dbase.cvc = nameof(ase.cvc);
                 dbase.matricula = ase.matricula;
                 dbase.id_materia = ase.id_materia;
                 dbase.id_asesor = ase.id_asesor;
-                
                 db.AsesoriasTb.Add(dbase);
                 db.SaveChanges();
                 return RedirectToAction("Index");
            }
-
-           return View(ase);
+            
+            return View(ase);
         }
 
         // GET: AsesoriasTbs/Edit/5
@@ -123,7 +124,7 @@ namespace AsesoriasUABC.Controllers
             if (alumno != null)
             {
                          
-                SelectList lstGrupos = new SelectList(db.SP_GetGruposAlumno(alumno.id_Alumno), "id_Temas", "nombre_tema");
+                SelectList lstGrupos = new SelectList(db.SP_GetGruposAlumno(alumno.id_Alumno), "id_grupo", "num_grupo");
                 result = new { status = "Succes", name = alumno.nombre +" "+ alumno.apellidoP +" "+ alumno.apellidoM, lstGrupos };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -146,17 +147,19 @@ namespace AsesoriasUABC.Controllers
         }
 
         // GET: AsesoriasTbs/Delete/5
-        public ActionResult LstTemasAsesor(string _id_materia)
+        public ActionResult LstTemasAsesor(string _id_materia,string _id_grupo)
         {
             var id_materia = Convert.ToInt32(_id_materia);
+            var id_grupo = Convert.ToInt32(_id_grupo);
 
-            var dbresult = db.SP_GetAsesoresTemas(id_materia);
+            var temas = db.SP_GetTemasMateria(id_materia);
+            var asesores = db.SP_GetAsesores(id_materia,id_grupo);
             
-            SelectList lstTemas = new SelectList(dbresult,"Id_Temas","nombre_tema");
-            SelectList lstAsesores = new SelectList(dbresult, "Id_Asesores", "nombre");
+            SelectList lstTemas = new SelectList(temas,"Id_Temas","nombre_tema");
+            SelectList lstAsesores = new SelectList(asesores, "Id_Asesores", "nombre");
             var result = new { lstTemas, lstAsesores };
             //  ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
-            return Json(result);
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
         public ActionResult LstMaterias(string _id_Grupo)
         {

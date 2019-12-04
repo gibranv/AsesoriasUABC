@@ -33,7 +33,7 @@ namespace AsesoriasUABC.ViewModels
         [Display(Name = "Cantida de veces cursada")]
         public Cvc cvc { get; set; }
         [Required(ErrorMessage = "Ingrese un grupo valido")]
-        [Range( 100, 999, ErrorMessage = "Ingrese un numero valido")]
+        [Range( 0, 10000, ErrorMessage = "Ingrese un numero valido")]
         public int Grupo { get; set; }
 
 

@@ -206,14 +206,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="SP_GetAsesoresTemas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="SP_GetAsesores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id_materia" Type="int" Mode="In" />
+    <Parameter Name="id_grupo" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_GetGruposAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id_alumno" Type="int" Mode="In" />
   </Function>
   <Function Name="Sp_GetMateriasGrupo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id_grupo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetTemasMateria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_materia" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="DBAsesoriasFIADModelStoreContainer">
     <EntitySet Name="Alumnos_Grupos" EntityType="Self.Alumnos_Grupos" Schema="dbo" store:Type="Tables" />

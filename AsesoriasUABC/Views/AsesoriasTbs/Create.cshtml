@@ -151,8 +151,8 @@
 
 
     //***********************Obtener Listado de materias 
-    $("#Grupos").change(function(){
-        var grupo = ("#Grupos").val()
+    $("#Grupo").change(function(){
+        var grupo = $("#Grupo").val()
         LstMaterias(grupo);
     })
     
@@ -171,8 +171,8 @@
                
                 $("#Materia").removeAttr('disabled')
                 var options = ""
-                // options += '<option value="Select">Select</option>';
-                for (var i = 0; i < result.lstTemas.length; i++) {
+                 options += '<option value="Select">Select</option>';
+                for (var i = 0; i < result.lstMaterias.length; i++) {
                     options += '<option value="' + result.lstMaterias[i].Value + '">' + result.lstMaterias[i].Text + '</option>';
 
                 }
@@ -188,6 +188,7 @@
     //*******************************
     function LstMateriasAsesores() {
         var id_materia = $("#Materia").val()
+        var id_grupo = $("#Grupo").val()
         if($("#Materia").text != "Select")
         {
         $("#Tema").empty()
@@ -197,7 +198,8 @@
         $.ajax({
             url: '@Url.Action("LstTemasAsesor", "AsesoriasTbs")',
             data: {
-                '_id_materia': id_materia
+                '_id_materia': id_materia,
+                '_id_grupo' :  id_grupo
             },
             type: 'POST',
             cache: false,
@@ -230,6 +232,7 @@
     }
 
     function GetAlumno(matricula) {
+        $("#Grupo").empty()
         $.ajaxSetup({ cache: false });
         if(true){
 
@@ -251,9 +254,11 @@
                     $("#LbErrormatricula").show();
                     //****Agregar grupos
                     $("#Grupo").removeAttr('disabled')
-                    var options = ""
-                    for (var i = 0; i < result.lstGrupo.length; i++) {
-                        options += '<option value="' + result.lstGrupo[i].Value + '">' + result.lstGrupo[i].Text + '</option>';
+
+                    var options = "";
+                    options += '<option value="Select">Select</option>';
+                    for (var i = 0; i < response.lstGrupos.length; i++) {
+                        options += '<option value="' + response.lstGrupos[i].Value + '">' + response.lstGrupos[i].Text + '</option>';
                     }
                     $("#Grupo").append(options)
 
@@ -261,7 +266,6 @@
         }else{
                     $("#LbErrormatricula").text("Matricula no encontrada")
                     $("#LbErrormatricula").show();
-                    console.log("1")
         }
 
         },

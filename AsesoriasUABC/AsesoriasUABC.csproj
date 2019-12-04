@@ -253,13 +253,16 @@
     <Compile Include="Models\Materias_Grupos.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SP_GetAsesoresTemas_Result.cs">
+    <Compile Include="Models\SP_GetAsesores_Result.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_GetGruposAlumno_Result.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sp_GetMateriasGrupo_Result.cs">
+      <DependentUpon>AsesoriasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetTemasMateria_Result.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\temasTb.cs">

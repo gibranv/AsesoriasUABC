@@ -211,14 +211,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="SP_GetAsesoresTemas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="SP_GetAsesores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_materia" Type="int" Mode="In" />
+          <Parameter Name="id_grupo" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_GetGruposAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_alumno" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_GetMateriasGrupo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_grupo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GetTemasMateria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_materia" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="DBAsesoriasFIADModelStoreContainer">
           <EntitySet Name="Alumnos_Grupos" EntityType="Self.Alumnos_Grupos" Schema="dbo" store:Type="Tables" />
@@ -325,7 +329,11 @@
           <FunctionImport Name="Sp_GetMateriasGrupo" ReturnType="Collection(DBAsesoriasFIADModel.Sp_GetMateriasGrupo_Result)">
           <Parameter Name="id_grupo" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SP_GetAsesoresTemas" ReturnType="Collection(DBAsesoriasFIADModel.SP_GetAsesoresTemas_Result)">
+          <FunctionImport Name="SP_GetAsesores" ReturnType="Collection(DBAsesoriasFIADModel.SP_GetAsesores_Result)">
+            <Parameter Name="id_materia" Mode="In" Type="Int32" />
+            <Parameter Name="id_grupo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetTemasMateria" ReturnType="Collection(DBAsesoriasFIADModel.SP_GetTemasMateria_Result)">
             <Parameter Name="id_materia" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -562,11 +570,15 @@
           <Property Type="Int32" Name="id_materia" Nullable="false" />
           <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="SP_GetAsesoresTemas_Result">
+        <ComplexType Name="SP_GetAsesores_Result">
+          <Property Type="Int32" Name="id_Asesores" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoP" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="ApellidoM" Nullable="true" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="SP_GetTemasMateria_Result">
           <Property Type="Int32" Name="id_Temas" Nullable="false" />
           <Property Type="String" Name="nombre_tema" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="Id_Asesores" Nullable="false" />
-          <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -699,13 +711,21 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SP_GetAsesoresTemas" FunctionName="DBAsesoriasFIADModel.Store.SP_GetAsesoresTemas">
+          <FunctionImportMapping FunctionImportName="SP_GetAsesores" FunctionName="DBAsesoriasFIADModel.Store.SP_GetAsesores">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetAsesoresTemas_Result">
+              <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetAsesores_Result">
+                <ScalarProperty Name="id_Asesores" ColumnName="id_Asesores" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+                <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetTemasMateria" FunctionName="DBAsesoriasFIADModel.Store.SP_GetTemasMateria">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetTemasMateria_Result">
                 <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
                 <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
-                <ScalarProperty Name="Id_Asesores" ColumnName="Id_Asesores" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

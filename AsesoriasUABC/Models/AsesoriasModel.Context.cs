@@ -56,13 +56,26 @@ namespace AsesoriasUABC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetMateriasGrupo_Result>("Sp_GetMateriasGrupo", id_grupoParameter);
         }
     
-        public virtual ObjectResult<SP_GetAsesoresTemas_Result> SP_GetAsesoresTemas(Nullable<int> id_materia)
+        public virtual ObjectResult<SP_GetAsesores_Result> SP_GetAsesores(Nullable<int> id_materia, Nullable<int> id_grupo)
         {
             var id_materiaParameter = id_materia.HasValue ?
                 new ObjectParameter("id_materia", id_materia) :
                 new ObjectParameter("id_materia", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAsesoresTemas_Result>("SP_GetAsesoresTemas", id_materiaParameter);
+            var id_grupoParameter = id_grupo.HasValue ?
+                new ObjectParameter("id_grupo", id_grupo) :
+                new ObjectParameter("id_grupo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAsesores_Result>("SP_GetAsesores", id_materiaParameter, id_grupoParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetTemasMateria_Result> SP_GetTemasMateria(Nullable<int> id_materia)
+        {
+            var id_materiaParameter = id_materia.HasValue ?
+                new ObjectParameter("id_materia", id_materia) :
+                new ObjectParameter("id_materia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetTemasMateria_Result>("SP_GetTemasMateria", id_materiaParameter);
         }
     }
 }

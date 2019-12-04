@@ -11,11 +11,9 @@ namespace AsesoriasUABC.Models
 {
     using System;
     
-    public partial class SP_GetAsesoresTemas_Result
+    public partial class SP_GetTemasMateria_Result
     {
         public int id_Temas { get; set; }
         public string nombre_tema { get; set; }
-        public int Id_Asesores { get; set; }
-        public string nombre { get; set; }
     }
 }
