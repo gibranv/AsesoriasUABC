@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DBAsesoriasFIADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="DBAsesoriasFIADEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Usuarios" EntityType="DBAsesoriasFIADModel.Usuarios" />
     <EntitySet Name="Alumnos_Grupos" EntityType="DBAsesoriasFIADModel.Alumnos_Grupos" />
     <EntitySet Name="AlumnosTb" EntityType="DBAsesoriasFIADModel.AlumnosTb" />
     <EntitySet Name="AsesoresTb" EntityType="DBAsesoriasFIADModel.AsesoresTb" />
@@ -60,20 +59,20 @@
     <FunctionImport Name="SP_GetTemasMateria" ReturnType="Collection(DBAsesoriasFIADModel.SP_GetTemasMateria_Result)">
       <Parameter Name="id_materia" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_AgregarUsuario">
+      <Parameter Name="id_asp" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="ApellidoP" Mode="In" Type="String" />
+      <Parameter Name="ApellidoM" Mode="In" Type="String" />
+      <Parameter Name="codigo_empleado" Mode="In" Type="Int32" />
+      <Parameter Name="sexo" Mode="In" Type="String" />
+      <Parameter Name="estatus" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="Usuarios" EntityType="DBAsesoriasFIADModel.Usuarios" />
+    <FunctionImport Name="SP_GetCarreras" ReturnType="Collection(DBAsesoriasFIADModel.SP_GetCarreras_Result)">
+      <Parameter Name="id_grupo" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
-  <EntityType Name="Usuarios">
-    <Key>
-      <PropertyRef Name="id_user" />
-    </Key>
-    <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_AspUser" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="ApellidoP" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="ApellidoM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="codigo_empleado" Type="Int32" Nullable="false" />
-    <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="estatus" Type="Int32" Nullable="false" />
-  </EntityType>
   <EntityType Name="Alumnos_Grupos">
     <Key>
       <PropertyRef Name="id" />
@@ -303,5 +302,22 @@
   <ComplexType Name="SP_GetTemasMateria_Result">
     <Property Type="Int32" Name="id_Temas" Nullable="false" />
     <Property Type="String" Name="nombre_tema" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_AspUser" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ApellidoP" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ApellidoM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="codigo_empleado" Type="Int32" Nullable="false" />
+    <Property Name="sexo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="estatus" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <ComplexType Name="SP_GetCarreras_Result">
+    <Property Type="Int32" Name="id_carrera" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

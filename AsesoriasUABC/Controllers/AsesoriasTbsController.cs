@@ -9,13 +9,16 @@ using System.Web.Mvc;
 using AsesoriasUABC.Models;
 
 using AsesoriasUABC.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AsesoriasUABC.Controllers
 {
     public class AsesoriasTbsController : Controller
     {
         private DBAsesoriasFIADEntities db = new DBAsesoriasFIADEntities();
-
+       
+        
         // GET: AsesoriasTbs
         public ActionResult Index()
         {
@@ -45,6 +48,8 @@ namespace AsesoriasUABC.Controllers
             List<temasTb> lstTemas = db.temasTb.ToList();
             List<AsesoresTb> lstAsesores = db.AsesoresTb.ToList();
             List<Grupos> lstGrupos = db.Grupos.ToList();
+            //List<carreras> lstCarreras = db.carreras.ToList();
+            //ViewBag.Carrera = new SelectList(lstCarreras, "id_carrera","nombre");
             ViewBag.LstMateria = new SelectList(lstMaterias, "id_materia", "nombre");
             ViewBag.LstTema = new SelectList(lstTemas, "id_Temas", "nombre_tema");
             ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
@@ -59,6 +64,7 @@ namespace AsesoriasUABC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AsesoriaModelView ase)
         {
+            var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
             List<MateriasTb> lstMaterias = db.MateriasTb.ToList();
             List<temasTb> lstTemas = db.temasTb.ToList();
             List<AsesoresTb> lstAsesores = db.AsesoresTb.ToList();
@@ -67,7 +73,9 @@ namespace AsesoriasUABC.Controllers
             ViewBag.LstMateria = new SelectList(lstMaterias, "id_materia", "nombre");
             ViewBag.LstTema = new SelectList(lstTemas, "id_Temas", "nombre_tema");
             ViewBag.LstAsesor = new SelectList(lstAsesores, "Id_Asesores", "nombre");
-
+         
+           
+       
             if (ModelState.IsValid)
             {
                 AsesoriasTb dbase = new AsesoriasTb();
@@ -164,9 +172,10 @@ namespace AsesoriasUABC.Controllers
         public ActionResult LstMaterias(string _id_Grupo)
         {
             int id_grupo = Convert.ToInt32(_id_Grupo);
-            var result = new { status = "Not Find", lstMaterias = new SelectList("", "") };
+            var result = new { status = "Not Find", lstMaterias = new SelectList("", ""),Carrera="" };
             SelectList lstMaterias = new SelectList(db.Sp_GetMateriasGrupo(id_grupo), "id_materia", "nombre");
-            result = new { status = "", lstMaterias };
+            var carrera = db.SP_GetCarreras(id_grupo).FirstOrDefault();
+            result = new { status = "", lstMaterias,Carrera=carrera.nombre };
             return Json(result);
         }
         public ActionResult Delete(int? id)

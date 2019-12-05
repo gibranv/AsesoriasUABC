@@ -10,17 +10,10 @@
 namespace AsesoriasUABC.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Usuarios
+    public partial class SP_GetCarreras_Result
     {
-        public int id_user { get; set; }
-        public string id_AspUser { get; set; }
-        public string Nombre { get; set; }
-        public string ApellidoP { get; set; }
-        public string ApellidoM { get; set; }
-        public int codigo_empleado { get; set; }
-        public string sexo { get; set; }
-        public bool estatus { get; set; }
+        public int id_carrera { get; set; }
+        public string nombre { get; set; }
     }
 }

@@ -35,8 +35,10 @@ namespace AsesoriasUABC
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/tables").Include(
+
                "~/Content/dataTables/jquery.dataTables.js",
                 "~/Content/dataTables/dataTables.bootstrap4.js"
+
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css/tables")

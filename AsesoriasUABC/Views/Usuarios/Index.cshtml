@@ -11,7 +11,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link"  href="#"><i class="fas fa-user"></i> Agregar ususario</a>
+            <a class="nav-link"  href="@Url.Action("Create","Usuarios")"><i class="fas fa-user"></i> Agregar ususario</a>
         </li>
     </ul>
 }
@@ -24,9 +24,6 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.id_AspUser)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Nombre)
                     </th>
                     <th>
@@ -38,12 +35,11 @@
                     <th>
                         @Html.DisplayNameFor(model => model.codigo_empleado)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.sexo)
-                    </th>
+
                     <th></th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach (var item in Model)
             {

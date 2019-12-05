@@ -1,20 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DBAsesoriasFIADModelStoreContainer" CdmEntityContainer="DBAsesoriasFIADEntities">
-    <EntitySetMapping Name="Usuarios">
-      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Usuarios">
-        <MappingFragment StoreEntitySet="Usuarios">
-          <ScalarProperty Name="estatus" ColumnName="estatus" />
-          <ScalarProperty Name="sexo" ColumnName="sexo" />
-          <ScalarProperty Name="codigo_empleado" ColumnName="codigo_empleado" />
-          <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
-          <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="id_AspUser" ColumnName="id_AspUser" />
-          <ScalarProperty Name="id_user" ColumnName="id_user" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Alumnos_Grupos">
       <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Alumnos_Grupos">
         <MappingFragment StoreEntitySet="Alumnos_Grupos">
@@ -141,6 +127,29 @@
         <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetTemasMateria_Result">
           <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
           <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_AgregarUsuario" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarUsuario" />
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="codigo_empleado" ColumnName="codigo_empleado" />
+          <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+          <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="id_AspUser" ColumnName="id_AspUser" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetCarreras" FunctionName="DBAsesoriasFIADModel.Store.SP_GetCarreras">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetCarreras_Result">
+          <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

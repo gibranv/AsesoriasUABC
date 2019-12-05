@@ -10,7 +10,8 @@ namespace AsesoriasUABC.ViewModels
 {
     public class AsesoriaModelView
     {
-        public int id_Alumno { get; set; }
+       
+
         [Required(ErrorMessage = "Seleccione una materia")]
         [Display(Name = "Materia")]
         public int id_materia { get; set; }

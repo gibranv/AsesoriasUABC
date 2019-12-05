@@ -8,12 +8,27 @@ using System.Web;
 using System.Web.Mvc;
 using AsesoriasUABC.Models;
 using AsesoriasUABC.ViewModels;
+using Microsoft.AspNet.Identity.Owin;
+using System.Threading.Tasks;
 
 namespace AsesoriasUABC.Controllers
 {
     public class UsuariosController : Controller
     {
         private DBAsesoriasFIADEntities db = new DBAsesoriasFIADEntities();
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Usuarios
         public ActionResult Index()
@@ -47,13 +62,29 @@ namespace AsesoriasUABC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UsuariosViewModel usuario)
+        public async Task<ActionResult> Create(UsuariosViewModel usuario)
         {
             if (ModelState.IsValid)
             {
-               
-              //db.Usuarios.Add(usuarios);
-                // db.SaveChanges();
+                var userAccount = new ApplicationUser
+                {
+                    Email = usuario.correo,
+                    UserName = usuario.correo,
+
+                };
+                var result = await UserManager.CreateAsync(userAccount,usuario.contraseña);
+                if(result.Succeeded)
+                {
+                    db.SP_AgregarUsuario(userAccount.Id,usuario.Nombre,usuario.ApellidoP,
+                        usuario.ApellidoM,usuario.codigo_Empleado,usuario.sexo,usuario.estatus);
+                    List<string> roles = usuario.GetRoles();
+                    foreach(var rol in roles)
+                    {
+                      await  UserManager.AddToRoleAsync(userAccount.Id,rol);
+                    }
+                    
+                }
+                
 
                 return RedirectToAction("Index");
             }

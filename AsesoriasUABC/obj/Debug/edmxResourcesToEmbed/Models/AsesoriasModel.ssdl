@@ -95,8 +95,8 @@
     <Property Name="ApellidoP" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="ApellidoM" Type="nvarchar" MaxLength="20" />
     <Property Name="codigo_empleado" Type="int" Nullable="false" />
-    <Property Name="sexo" Type="nchar" MaxLength="10" />
-    <Property Name="estatus" Type="int" Nullable="false" />
+    <Property Name="sexo" Type="nvarchar" MaxLength="50" />
+    <Property Name="estatus" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_Alumnos_Grupos_AlumnosTb">
     <End Role="AlumnosTb" Type="Self.AlumnosTb" Multiplicity="1" />
@@ -206,8 +206,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_AgregarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_asp" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="ApellidoP" Type="nvarchar" Mode="In" />
+    <Parameter Name="ApellidoM" Type="nvarchar" Mode="In" />
+    <Parameter Name="codigo_empleado" Type="int" Mode="In" />
+    <Parameter Name="sexo" Type="nvarchar" Mode="In" />
+    <Parameter Name="estatus" Type="bit" Mode="In" />
+  </Function>
   <Function Name="SP_GetAsesores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id_materia" Type="int" Mode="In" />
+    <Parameter Name="id_grupo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetCarreras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id_grupo" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_GetGruposAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

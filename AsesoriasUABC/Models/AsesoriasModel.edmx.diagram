@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6c908544eaa94919b3c702b9d75afcbf" Name="Diagram1">
-        <EntityTypeShape EntityType="DBAsesoriasFIADModel.Usuarios" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="DBAsesoriasFIADModel.Alumnos_Grupos" Width="1.5" PointX="5.125" PointY="4.75" />
         <EntityTypeShape EntityType="DBAsesoriasFIADModel.AlumnosTb" Width="1.5" PointX="7.75" PointY="4.75" />
         <EntityTypeShape EntityType="DBAsesoriasFIADModel.AsesoresTb" Width="1.5" PointX="0.75" PointY="15.375" />
@@ -24,6 +23,7 @@
         <AssociationConnector Association="DBAsesoriasFIADModel.FK_Alumnos_Grupos_AlumnosTb" />
         <AssociationConnector Association="DBAsesoriasFIADModel.FK_Alumnos_Grupos_Grupos" />
         <AssociationConnector Association="DBAsesoriasFIADModel.FK_Materias_Grupos_AsesoresTb" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.Usuarios" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -27,7 +27,6 @@ namespace AsesoriasUABC.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Alumnos_Grupos> Alumnos_Grupos { get; set; }
         public virtual DbSet<AlumnosTb> AlumnosTb { get; set; }
         public virtual DbSet<AsesoresTb> AsesoresTb { get; set; }
@@ -37,6 +36,7 @@ namespace AsesoriasUABC.Models
         public virtual DbSet<Materias_Grupos> Materias_Grupos { get; set; }
         public virtual DbSet<MateriasTb> MateriasTb { get; set; }
         public virtual DbSet<temasTb> temasTb { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
     
         public virtual ObjectResult<SP_GetGruposAlumno_Result> SP_GetGruposAlumno(Nullable<int> id_alumno)
         {
@@ -76,6 +76,48 @@ namespace AsesoriasUABC.Models
                 new ObjectParameter("id_materia", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetTemasMateria_Result>("SP_GetTemasMateria", id_materiaParameter);
+        }
+    
+        public virtual int SP_AgregarUsuario(string id_asp, string nombre, string apellidoP, string apellidoM, Nullable<int> codigo_empleado, string sexo, Nullable<bool> estatus)
+        {
+            var id_aspParameter = id_asp != null ?
+                new ObjectParameter("id_asp", id_asp) :
+                new ObjectParameter("id_asp", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPParameter = apellidoP != null ?
+                new ObjectParameter("ApellidoP", apellidoP) :
+                new ObjectParameter("ApellidoP", typeof(string));
+    
+            var apellidoMParameter = apellidoM != null ?
+                new ObjectParameter("ApellidoM", apellidoM) :
+                new ObjectParameter("ApellidoM", typeof(string));
+    
+            var codigo_empleadoParameter = codigo_empleado.HasValue ?
+                new ObjectParameter("codigo_empleado", codigo_empleado) :
+                new ObjectParameter("codigo_empleado", typeof(int));
+    
+            var sexoParameter = sexo != null ?
+                new ObjectParameter("sexo", sexo) :
+                new ObjectParameter("sexo", typeof(string));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("estatus", estatus) :
+                new ObjectParameter("estatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarUsuario", id_aspParameter, nombreParameter, apellidoPParameter, apellidoMParameter, codigo_empleadoParameter, sexoParameter, estatusParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetCarreras_Result> SP_GetCarreras(Nullable<int> id_grupo)
+        {
+            var id_grupoParameter = id_grupo.HasValue ?
+                new ObjectParameter("id_grupo", id_grupo) :
+                new ObjectParameter("id_grupo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetCarreras_Result>("SP_GetCarreras", id_grupoParameter);
         }
     }
 }
