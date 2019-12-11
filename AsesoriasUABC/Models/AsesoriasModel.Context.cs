@@ -119,5 +119,64 @@ namespace AsesoriasUABC.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetCarreras_Result>("SP_GetCarreras", id_grupoParameter);
         }
+    
+        public virtual int SP_AgregarAlumno(Nullable<int> matricula, string nombre, string apellidoP, string apellidoM, string sexo)
+        {
+            var matriculaParameter = matricula.HasValue ?
+                new ObjectParameter("matricula", matricula) :
+                new ObjectParameter("matricula", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var apellidoPParameter = apellidoP != null ?
+                new ObjectParameter("apellidoP", apellidoP) :
+                new ObjectParameter("apellidoP", typeof(string));
+    
+            var apellidoMParameter = apellidoM != null ?
+                new ObjectParameter("apellidoM", apellidoM) :
+                new ObjectParameter("apellidoM", typeof(string));
+    
+            var sexoParameter = sexo != null ?
+                new ObjectParameter("sexo", sexo) :
+                new ObjectParameter("sexo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarAlumno", matriculaParameter, nombreParameter, apellidoPParameter, apellidoMParameter, sexoParameter);
+        }
+    
+        public virtual int SP_AgregarTema(string numero_tema, string nombre_tema, Nullable<int> id_Materias)
+        {
+            var numero_temaParameter = numero_tema != null ?
+                new ObjectParameter("numero_tema", numero_tema) :
+                new ObjectParameter("numero_tema", typeof(string));
+    
+            var nombre_temaParameter = nombre_tema != null ?
+                new ObjectParameter("nombre_tema", nombre_tema) :
+                new ObjectParameter("nombre_tema", typeof(string));
+    
+            var id_MateriasParameter = id_Materias.HasValue ?
+                new ObjectParameter("id_Materias", id_Materias) :
+                new ObjectParameter("id_Materias", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AgregarTema", numero_temaParameter, nombre_temaParameter, id_MateriasParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_AgregarMateria(string nombre, Nullable<int> clave_materia, string plan_estudios)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var clave_materiaParameter = clave_materia.HasValue ?
+                new ObjectParameter("clave_materia", clave_materia) :
+                new ObjectParameter("clave_materia", typeof(int));
+    
+            var plan_estudiosParameter = plan_estudios != null ?
+                new ObjectParameter("plan_estudios", plan_estudios) :
+                new ObjectParameter("plan_estudios", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_AgregarMateria", nombreParameter, clave_materiaParameter, plan_estudiosParameter);
+        }
     }
 }

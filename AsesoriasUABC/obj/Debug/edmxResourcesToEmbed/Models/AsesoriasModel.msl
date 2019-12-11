@@ -153,5 +153,8 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_AgregarAlumno" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarAlumno" />
+    <FunctionImportMapping FunctionImportName="SP_AgregarTema" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarTema" />
+    <FunctionImportMapping FunctionImportName="SP_AgregarMateria" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarMateria" />
   </EntityContainerMapping>
 </Mapping>

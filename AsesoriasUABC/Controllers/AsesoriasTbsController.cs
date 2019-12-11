@@ -64,7 +64,7 @@ namespace AsesoriasUABC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AsesoriaModelView ase)
         {
-            var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+           
             List<MateriasTb> lstMaterias = db.MateriasTb.ToList();
             List<temasTb> lstTemas = db.temasTb.ToList();
             List<AsesoresTb> lstAsesores = db.AsesoresTb.ToList();
@@ -78,8 +78,9 @@ namespace AsesoriasUABC.Controllers
        
             if (ModelState.IsValid)
             {
+                ase.cv=ase.cv + 1;
                 AsesoriasTb dbase = new AsesoriasTb();
-                dbase.cvc = nameof(ase.cvc);
+                dbase.cvc = ase.cv.ToString();
                 dbase.matricula = ase.matricula;
                 dbase.id_materia = ase.id_materia;
                 dbase.id_asesor = ase.id_asesor;

@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -80,6 +88,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -199,9 +208,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlumnosTbsController.cs" />
-    <Compile Include="Controllers\AsesoresTbsController.cs" />
+    <Compile Include="Controllers\AsesoresController.cs" />
     <Compile Include="Controllers\AsesoriasTbsController.cs" />
     <Compile Include="Controllers\carrerasController.cs" />
+    <Compile Include="Controllers\GruposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MateriasTbsController.cs" />
@@ -238,6 +248,7 @@
     <Compile Include="Models\AsesoriasTb.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AsesorMD.cs" />
     <Compile Include="Models\carreras.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
@@ -245,6 +256,7 @@
     <Compile Include="Models\Grupos.cs">
       <DependentUpon>AsesoriasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GruposMD.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MateriasTb.cs">
@@ -277,7 +289,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AsesoresViewModel.cs" />
     <Compile Include="ViewModels\AsesoriaModelView.cs" />
+    <Compile Include="ViewModels\ExcelViewModel.cs" />
+    <Compile Include="ViewModels\FileExt.cs" />
     <Compile Include="ViewModels\UsuariosViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -432,11 +447,6 @@
     <Content Include="Views\AlumnosTbs\Details.cshtml" />
     <Content Include="Views\AlumnosTbs\Edit.cshtml" />
     <Content Include="Views\AlumnosTbs\Index.cshtml" />
-    <Content Include="Views\AsesoresTbs\Create.cshtml" />
-    <Content Include="Views\AsesoresTbs\Delete.cshtml" />
-    <Content Include="Views\AsesoresTbs\Details.cshtml" />
-    <Content Include="Views\AsesoresTbs\Edit.cshtml" />
-    <Content Include="Views\AsesoresTbs\Index.cshtml" />
     <Content Include="Views\AsesoriasTbs\Create.cshtml" />
     <Content Include="Views\AsesoriasTbs\Delete.cshtml" />
     <Content Include="Views\AsesoriasTbs\Details.cshtml" />
@@ -462,9 +472,21 @@
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\AlumnosTbs\AlumnosCreate.cshtml" />
+    <Content Include="Views\Asesores\Create.cshtml" />
+    <Content Include="Views\Asesores\Delete.cshtml" />
+    <Content Include="Views\Asesores\Details.cshtml" />
+    <Content Include="Views\Asesores\Edit.cshtml" />
+    <Content Include="Views\Asesores\Index.cshtml" />
+    <Content Include="Views\Grupos\Create.cshtml" />
+    <Content Include="Views\Grupos\Delete.cshtml" />
+    <Content Include="Views\Grupos\Details.cshtml" />
+    <Content Include="Views\Grupos\Edit.cshtml" />
+    <Content Include="Views\Grupos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

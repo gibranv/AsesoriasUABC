@@ -25,6 +25,7 @@
             @Html.HiddenFor(model => model.id_asesor )
             @Html.HiddenFor(model => model.id_materia )
             @Html.HiddenFor(model => model.id_Tema )
+            @Html.HiddenFor(model => model.cv)
             <div class="row" id="form">
                 <div class="col-6">
                     <div class="form-horizontal ">
@@ -159,7 +160,8 @@
     })
     $("#Create").click(function () {
 
-      $("#form").find(':disabled').removeAttr('disabled');
+        $("#form").find(':disabled').removeAttr('disabled');
+        $("#cv").val($("#cvc").val())
     })
 
     function LstMaterias(grupo) {
@@ -239,7 +241,7 @@
     }
 
     function GetAlumno(matricula) {
-        $("#Grupo").empty()
+        //$("#Grupo").empty()
         $.ajaxSetup({ cache: false });
         if(true){
 
@@ -262,12 +264,12 @@
                     //****Agregar grupos
                     $("#Grupo").removeAttr('disabled')
 
-                    var options = "";
-                    options += '<option value="Select">Select</option>';
-                    for (var i = 0; i < response.lstGrupos.length; i++) {
-                        options += '<option value="' + response.lstGrupos[i].Value + '">' + response.lstGrupos[i].Text + '</option>';
-                    }
-                    $("#Grupo").append(options)
+                    //var options = "";
+                    //options += '<option value="Select">Select</option>';
+                    //for (var i = 0; i < response.lstGrupos.length; i++) {
+                    //    options += '<option value="' + response.lstGrupos[i].Value + '">' + response.lstGrupos[i].Text + '</option>';
+                    //}
+                    //$("#Grupo").append(options)
 
 
         }else{

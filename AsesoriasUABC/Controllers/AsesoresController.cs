@@ -7,20 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AsesoriasUABC.Models;
+using System.Collections;
+using AsesoriasUABC.ViewModels;
 
 namespace AsesoriasUABC.Controllers
 {
-    public class AsesoresTbsController : Controller
+    public class AsesoresController : Controller
     {
         private DBAsesoriasFIADEntities db = new DBAsesoriasFIADEntities();
 
-        // GET: AsesoresTbs
+        // GET: Asesores
         public ActionResult Index()
         {
             return View(db.AsesoresTb.ToList());
         }
 
-        // GET: AsesoresTbs/Details/5
+        // GET: Asesores/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,18 +37,24 @@ namespace AsesoriasUABC.Controllers
             return View(asesoresTb);
         }
 
-        // GET: AsesoresTbs/Create
+        // GET: Asesores/Create
         public ActionResult Create()
         {
+            SelectListItem selListItem = new SelectListItem() { Value = "Hombre", Text = "Hombre" };
+            SelectListItem selListItem2 = new SelectListItem() { Value = "Mujer", Text = "Mujer" };
+            List<SelectListItem> lst = new List<SelectListItem>();
+            lst.Add(selListItem);
+            lst.Add(selListItem2);
+            ViewBag.sexo = new SelectList(lst,"Value","Text");
             return View();
         }
 
-        // POST: AsesoresTbs/Create
+        // POST: Asesores/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Asesores,nombre,ApellidoP,codigo_empleado,correo,contraseña,sexo,ApellidoM")] AsesoresTb asesoresTb)
+        public ActionResult Create([Bind(Include = "Id_Asesores,nombre,ApellidoP,codigo_empleado,correo,sexo,ApellidoM")] AsesoresTb asesoresTb)
         {
             if (ModelState.IsValid)
             {
@@ -58,9 +66,15 @@ namespace AsesoriasUABC.Controllers
             return View(asesoresTb);
         }
 
-        // GET: AsesoresTbs/Edit/5
+        // GET: Asesores/Edit/5
         public ActionResult Edit(int? id)
         {
+            
+            List<Grupos> lstGrupos = db.Grupos.ToList();
+            List<MateriasTb> lstMaterias = db.MateriasTb.ToList();
+            ViewBag.LstMaterias = new SelectList(lstMaterias, "id_materia", "nombre");
+            ViewBag.LstGrupos = new SelectList(lstGrupos, "id_grupo", "num_grupo");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -70,26 +84,37 @@ namespace AsesoriasUABC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(asesoresTb);
+            AsesoresViewModel ase = new AsesoresViewModel(asesoresTb);
+            
+            return View(ase);
         }
 
-        // POST: AsesoresTbs/Edit/5
+        // POST: Asesores/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_Asesores,nombre,ApellidoP,codigo_empleado,correo,contraseña,sexo,ApellidoM")] AsesoresTb asesoresTb)
+        public ActionResult Edit(AsesoresViewModel ase)
         {
+            List<Grupos> lstGrupos = db.Grupos.ToList();
+            List<MateriasTb> lstMaterias = db.MateriasTb.ToList();
+            ViewBag.LstMaterias = new SelectList(lstMaterias, "id_materia", "nombre");
+            ViewBag.LstGrupos = new SelectList(lstGrupos, "id_grupo", "num_grupo");
             if (ModelState.IsValid)
             {
-                db.Entry(asesoresTb).State = EntityState.Modified;
+              
+                Materias_Grupos mg = new Materias_Grupos();
+                mg.id_grupo = Convert.ToInt32(ase.LstGrupos);
+                mg.id_asesor = ase.Id_Asesores;
+                mg.id_materia = Convert.ToInt32(ase.LstMaterias);
+                db.Materias_Grupos.Add(mg);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(asesoresTb);
+            return View(ase);
         }
 
-        // GET: AsesoresTbs/Delete/5
+        // GET: Asesores/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +129,7 @@ namespace AsesoriasUABC.Controllers
             return View(asesoresTb);
         }
 
-        // POST: AsesoresTbs/Delete/5
+        // POST: Asesores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

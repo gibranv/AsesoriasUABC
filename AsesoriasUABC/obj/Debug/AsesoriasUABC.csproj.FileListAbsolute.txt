@@ -231,6 +231,12 @@ C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\Microsoft.Owi
 C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\obj\Debug\AsesoriasUABC.csprojResolveAssemblyReference.cache
 C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\obj\Debug\AsesoriasUABC.dll
 C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\obj\Debug\AsesoriasUABC.pdb
+C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\ExcelDataReader.dll
+C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\ExcelDataReader.pdb
+C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\ExcelDataReader.xml
+C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\ExcelDataReader.DataSet.dll
+C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\ExcelDataReader.DataSet.pdb
+C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\bin\ExcelDataReader.DataSet.xml
+C:\Users\richa\Desktop\IngSoftware\AsesoriasUABC\AsesoriasUABC\obj\Debug\AsesoriasUABC.csprojResolveAssemblyReference.cache

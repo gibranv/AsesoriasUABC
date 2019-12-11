@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AsesoriasUABC.Models;
+using AsesoriasUABC.ViewModels;
+using ExcelDataReader;
+using System.IO;
 
 namespace AsesoriasUABC.Controllers
 {
@@ -45,19 +48,42 @@ namespace AsesoriasUABC.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_materia,nombre,clave_materia,plan_estudios")] MateriasTb materiasTb)
+        public ActionResult Create(ExcelViewModel importExcel)
         {
-            if (ModelState.IsValid)
+            string path = Server.MapPath("~/Content/Upload/" + importExcel.file.FileName);
+            importExcel.file.SaveAs(path);
+            using (var stream = System.IO.File.Open(path, FileMode.Open, FileAccess.Read))
             {
-                db.MateriasTb.Add(materiasTb);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                {
+                    var result = reader.AsDataSet();
+
+                    // Ejemplos de acceso a datos
+                    DataTable table = result.Tables[0];
+                    DataRow clave_materia = table.Rows[0];
+                    DataRow plan_de_estudios = table.Rows[1];
+                    DataRow nombre = table.Rows[3];
+                    List<DataRow> temas = new List<DataRow>();
+                    int i = 4;
+                    do
+                    {
+                        temas.Add(table.Rows[i]);
+                        i++;
+                    } while (i < table.Rows.Count );
+                    //Agregando materias a la base de datos
+                     var id_materia = db.SP_AgregarMateria(nombre[0].ToString(),Convert.ToInt32(clave_materia[0]),plan_de_estudios[0].ToString()).FirstOrDefault();
+
+                    //Agregando temas a la base de datos
+                    foreach (DataRow tema in temas)
+                    {
+                        db.SP_AgregarTema(tema[0].ToString(), tema[1].ToString(), id_materia);
+                    }
+
+
+                }
             }
-
-            return View(materiasTb);
+            return View();
         }
-
         // GET: MateriasTbs/Edit/5
         public ActionResult Edit(int? id)
         {

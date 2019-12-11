@@ -36,7 +36,7 @@ namespace AsesoriasUABC.ViewModels
         [Required(ErrorMessage = "Ingrese un grupo valido")]
         [Range( 0, 10000, ErrorMessage = "Ingrese un numero valido")]
         public int Grupo { get; set; }
-
+        public int cv { get; set; }
 
     }
 }

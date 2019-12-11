@@ -87,7 +87,7 @@
           </Key>
           <Property Name="id_Temas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="numero_tema" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="nombre_tema" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="nombre_tema" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="id_Materias" Type="int" />
         </EntityType>
         <EntityType Name="Usuarios">
@@ -211,6 +211,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_AgregarAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="matricula" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="apellidoP" Type="nvarchar" Mode="In" />
+          <Parameter Name="apellidoM" Type="nvarchar" Mode="In" />
+          <Parameter Name="sexo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_AgregarMateria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="clave_materia" Type="int" Mode="In" />
+          <Parameter Name="plan_estudios" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_AgregarTema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numero_tema" Type="nvarchar" Mode="In" />
+          <Parameter Name="nombre_tema" Type="nvarchar" Mode="In" />
+          <Parameter Name="id_Materias" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_AgregarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_asp" Type="nvarchar" Mode="In" />
           <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
@@ -358,7 +375,24 @@
           </FunctionImport>
           <EntitySet Name="Usuarios" EntityType="DBAsesoriasFIADModel.Usuarios" />
           <FunctionImport Name="SP_GetCarreras" ReturnType="Collection(DBAsesoriasFIADModel.SP_GetCarreras_Result)">
-            <Parameter Name="id_grupo" Mode="In" Type="Int32" />
+          <Parameter Name="id_grupo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AgregarAlumno">
+            <Parameter Name="matricula" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellidoP" Mode="In" Type="String" />
+            <Parameter Name="apellidoM" Mode="In" Type="String" />
+            <Parameter Name="sexo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AgregarTema">
+            <Parameter Name="numero_tema" Mode="In" Type="String" />
+            <Parameter Name="nombre_tema" Mode="In" Type="String" />
+            <Parameter Name="id_Materias" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AgregarMateria" ReturnType="Collection(Int32)">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="clave_materia" Mode="In" Type="Int32" />
+            <Parameter Name="plan_estudios" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Alumnos_Grupos">
@@ -460,7 +494,7 @@
           </Key>
           <Property Name="id_Temas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="numero_tema" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="nombre_tema" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_tema" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="id_Materias" Type="Int32" />
           <NavigationProperty Name="MateriasTb" Relationship="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" FromRole="temasTb" ToRole="MateriasTb" />
         </EntityType>
@@ -766,6 +800,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_AgregarAlumno" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarAlumno" />
+          <FunctionImportMapping FunctionImportName="SP_AgregarTema" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarTema" />
+          <FunctionImportMapping FunctionImportName="SP_AgregarMateria" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarMateria" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

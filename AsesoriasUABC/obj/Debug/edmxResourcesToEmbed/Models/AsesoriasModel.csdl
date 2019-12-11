@@ -72,6 +72,23 @@
     <FunctionImport Name="SP_GetCarreras" ReturnType="Collection(DBAsesoriasFIADModel.SP_GetCarreras_Result)">
       <Parameter Name="id_grupo" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_AgregarAlumno">
+      <Parameter Name="matricula" Mode="In" Type="Int32" />
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="apellidoP" Mode="In" Type="String" />
+      <Parameter Name="apellidoM" Mode="In" Type="String" />
+      <Parameter Name="sexo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_AgregarTema">
+      <Parameter Name="numero_tema" Mode="In" Type="String" />
+      <Parameter Name="nombre_tema" Mode="In" Type="String" />
+      <Parameter Name="id_Materias" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_AgregarMateria" ReturnType="Collection(Int32)">
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="clave_materia" Mode="In" Type="Int32" />
+      <Parameter Name="plan_estudios" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Alumnos_Grupos">
     <Key>
@@ -172,7 +189,7 @@
     </Key>
     <Property Name="id_Temas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="numero_tema" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="nombre_tema" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nombre_tema" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="id_Materias" Type="Int32" />
     <NavigationProperty Name="MateriasTb" Relationship="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" FromRole="temasTb" ToRole="MateriasTb" />
   </EntityType>

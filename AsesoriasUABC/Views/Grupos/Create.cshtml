@@ -1,0 +1,48 @@
+﻿@model AsesoriasUABC.Models.Grupos
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+<div class="card">
+    <div class="card-header">
+        <h3>Grupos</h3>
+    </div>
+    <div class="card-body">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.num_grupo, htmlAttributes: new { @class = "control-label col-md-6" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.num_grupo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.num_grupo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_carrera, htmlAttributes: new { @class = "control-label col-md-6" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_carrera,null,"Carrera", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.id_carrera, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</div>
+    @Html.AntiForgeryToken()
+   
+   
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
