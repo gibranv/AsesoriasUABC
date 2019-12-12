@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace AsesoriasUABC.Controllers
 {
+    [Authorize(Roles = "Administrador,Director,Subdirector")]
     public class UsuariosController : Controller
     {
         private DBAsesoriasFIADEntities db = new DBAsesoriasFIADEntities();

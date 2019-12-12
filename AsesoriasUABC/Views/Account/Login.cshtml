@@ -1,4 +1,5 @@
-﻿
+﻿@using AsesoriasUABC.Models
+@model LoginViewModel
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/Default.cshtml";
@@ -13,22 +14,26 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg"></p>
 
-                <form action="~/AsesoriasTbs" method="post">
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        @Html.TextBoxFor(m => m.Email, "", new { placeholder = "Correo Electronico", @class = "form-control" })
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger col-12" })
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        @Html.PasswordFor(m => m.Password, new { placeholder = "Contraseña", @class = "form-control" })
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger col-12" })
                     </div>
                     <div class="row">
 
@@ -38,16 +43,21 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                </form>
+
                 <p class="mb-1">
                     <a href="#">Olvide mi contraseña</a>
                 </p>
                 <div >
-                    <button type="submit" onclick="location.href = '../AsesoriasTbs/Create'" url="~/AsesoriasTbs/Create" class="btn btn-block btn-success btn-lg">Registrar Asesoria</button>
+                    <button onclick="location.href = '../AsesoriasTbs/Create'" url="~/AsesoriasTbs/Create"  class="btn btn-block btn-success btn-lg">Registrar Asesoria</button>
                 </div>
+}
             </div>
         
         <!-- /.login-card-body -->
     </div>
 </div>
 
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

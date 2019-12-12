@@ -10,6 +10,7 @@ using AsesoriasUABC.Models;
 
 namespace AsesoriasUABC.Controllers
 {
+    [Authorize(Roles = "Administrador,Director,Subdirector,Profesor,Coordinador")]
     public class temasTbsController : Controller
     {
         private DBAsesoriasFIADEntities db = new DBAsesoriasFIADEntities();

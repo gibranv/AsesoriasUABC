@@ -378,6 +378,7 @@
     <Content Include="Content\dist\js\adminlte.js.map" />
     <Content Include="Content\dist\js\adminlte.min.js.map" />
     <Content Include="Content\toastr\toastr.js.map" />
+    <Content Include="webfonts\fa-brands-400.svg" />
     <EntityDeploy Include="Models\AsesoriasModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AsesoriasModel.Designer.cs</LastGenOutput>
@@ -483,6 +484,20 @@
     <Content Include="Views\Grupos\Details.cshtml" />
     <Content Include="Views\Grupos\Edit.cshtml" />
     <Content Include="Views\Grupos\Index.cshtml" />
+    <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="webfonts\fa-brands-400.ttf" />
+    <Content Include="webfonts\fa-brands-400.woff" />
+    <Content Include="webfonts\fa-brands-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.eot" />
+    <Content Include="webfonts\fa-regular-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.ttf" />
+    <Content Include="webfonts\fa-regular-400.eot" />
+    <Content Include="webfonts\fa-regular-400.woff" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AsesoriasUABC.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace AsesoriasUABC.Controllers
 {
@@ -17,7 +19,7 @@ namespace AsesoriasUABC.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private DBAsesoriasFIADEntities db = new DBAsesoriasFIADEntities();
         public AccountController()
         {
         }
@@ -139,7 +141,28 @@ namespace AsesoriasUABC.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            ApplicationDbContext context = new ApplicationDbContext();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            if(!roleManager.RoleExists("Administrador"))
+            {
+                List<string> roles = new List<string>();
+                roles.Add("Profesor");
+                roles.Add("Subdirector");
+                roles.Add("Administrador");
+                roles.Add("Coordinador");
+                roles.Add("Becario");
+                roles.Add("Secretario");
+                roles.Add("Director");
+                foreach(string ro in roles )
+                {
+                    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                    role.Name = ro;
+                    roleManager.Create(role);
+                }
+                return View();
+            }
+           
+            return RedirectToAction("Login", "Account");
         }
 
         //

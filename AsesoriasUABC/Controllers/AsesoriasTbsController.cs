@@ -43,7 +43,7 @@ namespace AsesoriasUABC.Controllers
         // GET: AsesoriasTbs/Create
         public ActionResult Create()
         {
-            
+            var s= User.IsInRole("Administrador");
             List<MateriasTb> lstMaterias = db.MateriasTb.ToList();
             List<temasTb> lstTemas = db.temasTb.ToList();
             List<AsesoresTb> lstAsesores = db.AsesoresTb.ToList();

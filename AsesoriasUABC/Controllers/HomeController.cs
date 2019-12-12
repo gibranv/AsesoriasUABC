@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace AsesoriasUABC.Controllers
 {
+    [Authorize(Roles = "Administrador,Director,Subdirector,Profesor,Coordinador")]
     public class HomeController : Controller
     {
         public ActionResult Index()
