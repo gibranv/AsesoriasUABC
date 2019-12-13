@@ -4,70 +4,78 @@
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section SubMenueOptions{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-done d-sm-inline-block">
+            <a href="@Url.Action("Index","Asesores")" class="nav-link"><i class="fas fa-arrow-alt-circle-left"></i> Regresar a la tabla </a>
+        </li>
+    </ul>
+}
+<h2>Borrar asesor</h2>
+<div class="card">
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
 
-<h2>Delete</h2>
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>AsesoresTb</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ApellidoP)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ApellidoP)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApellidoP)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.codigo_empleado)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApellidoP)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.codigo_empleado)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.codigo_empleado)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.correo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.codigo_empleado)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.correo)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.correo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.sexo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.sexo)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.sexo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ApellidoM)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.sexo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ApellidoM)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApellidoM)
-        </dt>
+        </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApellidoM)
-        </dd>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> 
+            </div>
+        }
+    </div>
 </div>
+

@@ -6,6 +6,7 @@ using System.Web;
 
 namespace AsesoriasUABC.Models
 {
+    [MetadataType(typeof(Validation_Alumnos))]
     public partial class AlumnosTb
     {
     }

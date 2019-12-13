@@ -4,64 +4,72 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section SubMenueOptions{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-done d-sm-inline-block">
+            <a href="@Url.Action("Index","Asesores")" class="nav-link"><i class="fas fa-arrow-alt-circle-left"></i> Regresar a la tabla </a>
+        </li>
+        <li class="nav-item d-done d-sm-inline-block">
+            <a href="@Url.Action("Edit","Asesores",new { id = Model.Id_Asesores })" class="nav-link"><i class="fas fa-edit"></i> Editar asesor </a>
+        </li>
+    </ul>
+}
 <h2>Details</h2>
+<div class="card">
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
 
-<div>
-    <h4>AsesoresTb</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ApellidoP)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApellidoP)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ApellidoP)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApellidoP)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.codigo_empleado)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.codigo_empleado)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.codigo_empleado)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.codigo_empleado)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.correo)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.correo)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.correo)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.sexo)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.sexo)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.sexo)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.sexo)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ApellidoM)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApellidoM)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ApellidoM)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApellidoM)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Asesores }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

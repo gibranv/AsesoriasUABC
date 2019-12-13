@@ -505,6 +505,7 @@
     <Content Include="webfonts\fa-regular-400.ttf" />
     <Content Include="webfonts\fa-regular-400.eot" />
     <Content Include="webfonts\fa-regular-400.woff" />
+    <Content Include="Views\Shared\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

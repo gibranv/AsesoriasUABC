@@ -18,11 +18,12 @@
         <nav class="main-header navbar navbar-expand navbar-green navbar-light">
             <!-- Left navbar links -->
             @RenderSection("SubMenueOptions", required: false)
+           
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <!-- Notifications Dropdown Menu -->
-               
+                @Html.Partial("Logout")
             </ul>
         </nav>
         <aside class="main-sidebar sidebar-light-lime elevation-4">

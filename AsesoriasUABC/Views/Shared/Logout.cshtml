@@ -1,0 +1,20 @@
+﻿
+@using Microsoft.AspNet.Identity
+@using AsesoriasUABC.Models
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav ml-auto" }))
+    {
+        @Html.AntiForgeryToken()
+        <li class="user-menu">
+            <a href="#" class="nav-link" aria-expanded="false">
+                @User.Identity.GetUserName()
+
+            </a>
+        </li>
+        <li class="nav-item user-menu ">
+            <button class="btn btn-link" href="javascript:document.getElementById('logoutForm').submit()">Log off <i class="fas fa-sign-out-alt"></i></button>
+        </li>
+
+    }
+}
