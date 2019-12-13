@@ -22,11 +22,14 @@ namespace AsesoriasUABC.ViewModels
         [Display(Name = "Asesor")]
         public int id_asesor { get; set; }
         [Required(ErrorMessage = "Ingrese una fecha valida con formato dd/mm/aa")]
+        [Display(Name ="Fecha")]
         public DateTime fecha { get; set; }
         [Required(ErrorMessage = "Es necesario llenar campo matricula")]
         [Range(100000,9999999, ErrorMessage = "Ingrese un numero valido")] 
+        [Display(Name ="Matricula")]
         public int matricula { get; set; }
         //[Required(ErrorMessage = "Es necesario agregar nombre")]
+        
         public string Nombre { get; set; }
         [Required(ErrorMessage = "Es necesario agregar carrera")]
         public string Carrera { get; set; }
