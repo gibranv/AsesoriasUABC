@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBAsesoriasFIADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Alumnos_Grupos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id_alumno" Type="int" Nullable="false" />
+    <Property Name="id_grupo" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AlumnosTb">
+    <Key>
+      <PropertyRef Name="id_Alumno" />
+    </Key>
+    <Property Name="id_Alumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matricula" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellidoP" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sexo" Type="nchar" MaxLength="10" />
+    <Property Name="apellidoM" Type="nvarchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AsesoresTb">
+    <Key>
+      <PropertyRef Name="Id_Asesores" />
+    </Key>
+    <Property Name="Id_Asesores" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ApellidoP" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="codigo_empleado" Type="int" Nullable="false" />
+    <Property Name="correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="sexo" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="ApellidoM" Type="nvarchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="AsesoriasTb">
+    <Key>
+      <PropertyRef Name="Id_asesoria" />
+    </Key>
+    <Property Name="Id_asesoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matricula" Type="int" />
+    <Property Name="id_materia" Type="int" />
+    <Property Name="id_asesor" Type="int" />
+    <Property Name="cvc" Type="nchar" MaxLength="10" />
+    <Property Name="time" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="carreras">
+    <Key>
+      <PropertyRef Name="id_carrera" />
+    </Key>
+    <Property Name="id_carrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codigo" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Grupos">
+    <Key>
+      <PropertyRef Name="id_grupo" />
+    </Key>
+    <Property Name="id_grupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_carrera" Type="int" />
+    <Property Name="num_grupo" Type="int" />
+  </EntityType>
+  <EntityType Name="Materias_Grupos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id_materia" Type="int" Nullable="false" />
+    <Property Name="id_grupo" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_asesor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MateriasTb">
+    <Key>
+      <PropertyRef Name="id_materia" />
+    </Key>
+    <Property Name="id_materia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="clave_materia" Type="int" Nullable="false" />
+    <Property Name="plan_estudios" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="temasTb">
+    <Key>
+      <PropertyRef Name="id_Temas" />
+    </Key>
+    <Property Name="id_Temas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numero_tema" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="nombre_tema" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="id_Materias" Type="int" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_AspUser" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoP" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ApellidoM" Type="nvarchar" MaxLength="20" />
+    <Property Name="codigo_empleado" Type="int" Nullable="false" />
+    <Property Name="sexo" Type="nvarchar" MaxLength="50" />
+    <Property Name="estatus" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Alumnos_Grupos_AlumnosTb">
+    <End Role="AlumnosTb" Type="Self.AlumnosTb" Multiplicity="1" />
+    <End Role="Alumnos_Grupos" Type="Self.Alumnos_Grupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AlumnosTb">
+        <PropertyRef Name="id_Alumno" />
+      </Principal>
+      <Dependent Role="Alumnos_Grupos">
+        <PropertyRef Name="id_alumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Alumnos_Grupos_Grupos">
+    <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
+    <End Role="Alumnos_Grupos" Type="Self.Alumnos_Grupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grupos">
+        <PropertyRef Name="id_grupo" />
+      </Principal>
+      <Dependent Role="Alumnos_Grupos">
+        <PropertyRef Name="id_grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AsesoriasTb_AsesoresTb">
+    <End Role="AsesoresTb" Type="Self.AsesoresTb" Multiplicity="0..1" />
+    <End Role="AsesoriasTb" Type="Self.AsesoriasTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AsesoresTb">
+        <PropertyRef Name="Id_Asesores" />
+      </Principal>
+      <Dependent Role="AsesoriasTb">
+        <PropertyRef Name="id_asesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AsesoriasTb_MateriasTb">
+    <End Role="MateriasTb" Type="Self.MateriasTb" Multiplicity="0..1" />
+    <End Role="AsesoriasTb" Type="Self.AsesoriasTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MateriasTb">
+        <PropertyRef Name="id_materia" />
+      </Principal>
+      <Dependent Role="AsesoriasTb">
+        <PropertyRef Name="id_materia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grupos_carreras">
+    <End Role="carreras" Type="Self.carreras" Multiplicity="0..1" />
+    <End Role="Grupos" Type="Self.Grupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="carreras">
+        <PropertyRef Name="id_carrera" />
+      </Principal>
+      <Dependent Role="Grupos">
+        <PropertyRef Name="id_carrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grupos_Grupos">
+    <End Role="Grupos" Type="Self.Grupos" Multiplicity="1" />
+    <End Role="Materias_Grupos" Type="Self.Materias_Grupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grupos">
+        <PropertyRef Name="id_grupo" />
+      </Principal>
+      <Dependent Role="Materias_Grupos">
+        <PropertyRef Name="id_grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Materias_Grupos_AsesoresTb">
+    <End Role="AsesoresTb" Type="Self.AsesoresTb" Multiplicity="1" />
+    <End Role="Materias_Grupos" Type="Self.Materias_Grupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AsesoresTb">
+        <PropertyRef Name="Id_Asesores" />
+      </Principal>
+      <Dependent Role="Materias_Grupos">
+        <PropertyRef Name="id_asesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Materias_Grupos_MateriasTb">
+    <End Role="MateriasTb" Type="Self.MateriasTb" Multiplicity="1" />
+    <End Role="Materias_Grupos" Type="Self.Materias_Grupos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MateriasTb">
+        <PropertyRef Name="id_materia" />
+      </Principal>
+      <Dependent Role="Materias_Grupos">
+        <PropertyRef Name="id_materia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_temasTb_MateriasTb">
+    <End Role="MateriasTb" Type="Self.MateriasTb" Multiplicity="0..1" />
+    <End Role="temasTb" Type="Self.temasTb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MateriasTb">
+        <PropertyRef Name="id_materia" />
+      </Principal>
+      <Dependent Role="temasTb">
+        <PropertyRef Name="id_Materias" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_AgregarAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="matricula" Type="int" Mode="In" />
+    <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="apellidoP" Type="nvarchar" Mode="In" />
+    <Parameter Name="apellidoM" Type="nvarchar" Mode="In" />
+    <Parameter Name="sexo" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_AgregarMateria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="clave_materia" Type="int" Mode="In" />
+    <Parameter Name="plan_estudios" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_AgregarTema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="numero_tema" Type="nvarchar" Mode="In" />
+    <Parameter Name="nombre_tema" Type="nvarchar" Mode="In" />
+    <Parameter Name="id_Materias" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_AgregarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_asp" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="ApellidoP" Type="nvarchar" Mode="In" />
+    <Parameter Name="ApellidoM" Type="nvarchar" Mode="In" />
+    <Parameter Name="codigo_empleado" Type="int" Mode="In" />
+    <Parameter Name="sexo" Type="nvarchar" Mode="In" />
+    <Parameter Name="estatus" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="SP_GetAsesores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_materia" Type="int" Mode="In" />
+    <Parameter Name="id_grupo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetCarreras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_grupo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetGruposAlumno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_alumno" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_GetMateriasGrupo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_grupo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetTemasMateria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_materia" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="DBAsesoriasFIADModelStoreContainer">
+    <EntitySet Name="Alumnos_Grupos" EntityType="Self.Alumnos_Grupos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AlumnosTb" EntityType="Self.AlumnosTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AsesoresTb" EntityType="Self.AsesoresTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AsesoriasTb" EntityType="Self.AsesoriasTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="carreras" EntityType="Self.carreras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Grupos" EntityType="Self.Grupos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materias_Grupos" EntityType="Self.Materias_Grupos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MateriasTb" EntityType="Self.MateriasTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="temasTb" EntityType="Self.temasTb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Alumnos_Grupos_AlumnosTb" Association="Self.FK_Alumnos_Grupos_AlumnosTb">
+      <End Role="AlumnosTb" EntitySet="AlumnosTb" />
+      <End Role="Alumnos_Grupos" EntitySet="Alumnos_Grupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Alumnos_Grupos_Grupos" Association="Self.FK_Alumnos_Grupos_Grupos">
+      <End Role="Grupos" EntitySet="Grupos" />
+      <End Role="Alumnos_Grupos" EntitySet="Alumnos_Grupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AsesoriasTb_AsesoresTb" Association="Self.FK_AsesoriasTb_AsesoresTb">
+      <End Role="AsesoresTb" EntitySet="AsesoresTb" />
+      <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AsesoriasTb_MateriasTb" Association="Self.FK_AsesoriasTb_MateriasTb">
+      <End Role="MateriasTb" EntitySet="MateriasTb" />
+      <End Role="AsesoriasTb" EntitySet="AsesoriasTb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grupos_carreras" Association="Self.FK_Grupos_carreras">
+      <End Role="carreras" EntitySet="carreras" />
+      <End Role="Grupos" EntitySet="Grupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grupos_Grupos" Association="Self.FK_Grupos_Grupos">
+      <End Role="Grupos" EntitySet="Grupos" />
+      <End Role="Materias_Grupos" EntitySet="Materias_Grupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Materias_Grupos_AsesoresTb" Association="Self.FK_Materias_Grupos_AsesoresTb">
+      <End Role="AsesoresTb" EntitySet="AsesoresTb" />
+      <End Role="Materias_Grupos" EntitySet="Materias_Grupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Materias_Grupos_MateriasTb" Association="Self.FK_Materias_Grupos_MateriasTb">
+      <End Role="MateriasTb" EntitySet="MateriasTb" />
+      <End Role="Materias_Grupos" EntitySet="Materias_Grupos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_temasTb_MateriasTb" Association="Self.FK_temasTb_MateriasTb">
+      <End Role="MateriasTb" EntitySet="MateriasTb" />
+      <End Role="temasTb" EntitySet="temasTb" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

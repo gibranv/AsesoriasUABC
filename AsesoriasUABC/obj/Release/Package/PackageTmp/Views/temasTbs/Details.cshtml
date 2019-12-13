@@ -1,0 +1,35 @@
+﻿@model AsesoriasUABC.Models.temasTb
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>temasTb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.numero_tema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero_tema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_tema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_tema)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_Temas }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

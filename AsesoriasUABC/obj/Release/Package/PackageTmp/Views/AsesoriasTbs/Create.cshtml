@@ -1,0 +1,286 @@
+﻿@model AsesoriasUABC.ViewModels.AsesoriaModelView
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section SubMenueOptions{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+
+    </ul>
+}
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Registro</h4>
+    </div>
+    <div class="card-body">
+        <h4>Informacion del Alumno</h4>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.id_asesor )
+            @Html.HiddenFor(model => model.id_materia )
+            @Html.HiddenFor(model => model.id_Tema )
+            @Html.HiddenFor(model => model.cv)
+            <div class="row" id="form">
+                <div class="col-6">
+                    <div class="form-horizontal ">
+                   
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.matricula, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.matricula, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(model => model.matricula, "", new { @class = "text-danger" , @id="LbErrormatricula"})
+                                <input type="button" value="Buscar Matricula" class="btn btn-default" id="mtr" />
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Carrera, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @*@Html.DropDownList("Carrera",null,"Carrera", new { @class = "form-control" }) })*@
+                                @Html.EditorFor(model => model.Carrera, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Carrera, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Grupo, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Grupo",null,"Grupo" , new { @class = "form-control" } )
+                       
+                                @Html.ValidationMessageFor(model => model.Grupo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.cvc , htmlAttributes: new { @class = "control-label col-md-8" })
+                            <div class="col-md-10">
+                                @Html.EnumDropDownListFor(model => model.cvc,  new { @class = "form-control" } )
+                                @Html.ValidationMessageFor(model => model.cvc, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                      
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" id="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+
+                    @*<div class="form-group">
+                        @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.id_materia, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Materia", ViewBag.LstMateria as SelectList, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.id_materia, "", new { @class = "text-danger" , @id = "Lbmateria" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.id_Tema , htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Tema", ViewBag.LstTema as SelectList, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.id_Tema, "", new { @class = "text-danger", @id = "Lbtema" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.id_asesor, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Asesor", ViewBag.LstAsesor as SelectList, new { @class = "form-control"})
+                        </div>
+                        @Html.ValidationMessageFor(model => model.id_asesor, "", new { @class = "text-danger",@id="Lbasesor" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var now = new Date(Date.now())
+        $("#fecha").val(now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear())
+        $("#fecha").prop("disabled", true)
+        $("#Grupo").prop("disable",true)
+        $("#Materia").prop("disabled", true)
+        $("#Tema").prop("disabled", true)
+        $("#Carrera").prop("disabled",true)
+        $("#Asesor").prop("disabled", true)
+        $("#Nombre").prop("disabled", true)
+    });
+
+    $("#Materia").change(function () {
+        var id_materia = $("#Materia").val()
+    
+        LstMateriasAsesores(id_materia)
+    });
+    $('#mtr').click(function () {
+        if ($("#matricula").val() != "") {
+            GetAlumno($("#matricula").val());
+           
+        }
+    });
+
+
+    //***********************Obtener Listado de materias 
+    $("#Grupo").change(function(){
+        var grupo = $("#Grupo").val()
+        LstMaterias(grupo);
+    })
+    $("#Create").click(function () {
+
+        $("#form").find(':disabled').removeAttr('disabled');
+        $("#cv").val($("#cvc").val())
+    })
+
+    function LstMaterias(grupo) {
+    
+        $("#Materia").empty();
+        $.ajaxSetup({ cache: false });
+        $.ajax({
+            url: '@Url.Action("LstMaterias", "AsesoriasTbs")',
+            data: {
+                '_id_Grupo': grupo
+            },
+            type: 'POST',
+            cache: false,
+            success: function (result) {
+               
+                $("#Materia").removeAttr('disabled')
+                var options = ""
+                 options += '<option value="Select">Select</option>';
+                for (var i = 0; i < result.lstMaterias.length; i++) {
+                    options += '<option value="' + result.lstMaterias[i].Value + '">' + result.lstMaterias[i].Text + '</option>';
+
+                }
+                $("#Materia").append(options)
+                $("#Carrera").text(result.Carrera);
+               $("#Carrera").val(result.Carrera)
+
+            },
+            error: function (result) {
+            }
+        });
+
+    }
+    //*******************************
+    function LstMateriasAsesores() {
+        var id_materia = $("#Materia").val()
+        var id_grupo = $("#Grupo").val()
+        if($("#Materia").text != "Select")
+        {
+        $("#Tema").empty()
+        $("#Asesor").empty()
+        $.ajaxSetup({ cache: false });
+        console.log(id_materia)
+        $.ajax({
+            url: '@Url.Action("LstTemasAsesor", "AsesoriasTbs")',
+            data: {
+                '_id_materia': id_materia,
+                '_id_grupo' :  id_grupo
+            },
+            type: 'POST',
+            cache: false,
+            success: function (result) {
+                //$("#Tema").trigger('chosen:updated')
+                $("#Tema").removeAttr('disabled')
+                var options = ""
+               // options += '<option value="Select">Select</option>';
+                for (var i = 0; i < result.lstTemas.length; i++) {
+                    options += '<option value="' + result.lstTemas[i].Value + '">' + result.lstTemas[i].Text + '</option>';
+
+                }
+                $("#Tema").append(options)
+                options = ""
+               // options += '<option value="Select">Select</option>';
+                for (var i = 0; i < result.lstAsesores.length; i++) {
+                    options += '<option value="' + result.lstAsesores[i].Value + '">' + result.lstAsesores[i].Text + '</option>';
+                }
+                $("#Asesor").append(options)
+                $("#Asesor").removeAttr("disabled")
+       
+            },
+            error: function (result) {
+            }
+        });
+        }
+        else {
+            $("#Lbmateria").show();
+        }
+    }
+
+    function GetAlumno(matricula) {
+        //$("#Grupo").empty()
+        $.ajaxSetup({ cache: false });
+        if(true){
+
+        $.ajax({
+            url: '@Url.Action("FindAlumno", "AsesoriasTbs")',
+            data: {
+                'm': matricula
+        },
+            type: 'POST',
+            cache: false,
+            success: function (response) {
+                if (response.status == "Succes") {
+                    $("#Nombre").val(response.name);
+                    $("#Carrera").val(response.carrera);
+                    $("#Carrera").disabled = true;
+                    $("#Nombre").disabled = true;
+                    //$("#matricula").prop("disabled", true)
+                   // $("#Materia").removeAttr('disabled');
+                    $("#LbErrormatricula").show();
+                    //****Agregar grupos
+                    $("#Grupo").removeAttr('disabled')
+
+                    //var options = "";
+                    //options += '<option value="Select">Select</option>';
+                    //for (var i = 0; i < response.lstGrupos.length; i++) {
+                    //    options += '<option value="' + response.lstGrupos[i].Value + '">' + response.lstGrupos[i].Text + '</option>';
+                    //}
+                    //$("#Grupo").append(options)
+
+
+        }else{
+                    $("#LbErrormatricula").text("Matricula no encontrada")
+                    $("#LbErrormatricula").show();
+        }
+
+        },
+            error: function (response) {
+        }
+        });
+    }
+    }
+</script>

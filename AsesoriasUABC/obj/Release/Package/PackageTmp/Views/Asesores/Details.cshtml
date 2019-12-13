@@ -1,0 +1,67 @@
+﻿@model AsesoriasUABC.Models.AsesoresTb
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AsesoresTb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApellidoP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApellidoP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.codigo_empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.codigo_empleado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sexo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sexo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApellidoM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApellidoM)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Asesores }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

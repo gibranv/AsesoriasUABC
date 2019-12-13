@@ -1,0 +1,143 @@
+﻿@using Microsoft.AspNet.Identity
+@using AsesoriasUABC.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Asesorias FIAD</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/ Contend/fonts")
+    @Styles.Render("~/ Contend/fonts2")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-green navbar-light">
+            <!-- Left navbar links -->
+            @RenderSection("SubMenueOptions", required: false)
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <!-- Notifications Dropdown Menu -->
+               
+            </ul>
+        </nav>
+        <aside class="main-sidebar sidebar-light-lime elevation-4">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-link">
+                <span>FIAD</span>
+                <span class="brand-text font-weight-light">| Asesorias</span>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+          
+                <!-- Sidebar Menu  Catalogs-->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                       
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","AsesoriasTbs")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Agregar Asesoria
+                                    
+                                </p>
+                            </a>
+                        </li>
+
+                        @if (User != null && (User.IsInRole("Administrador") || User.IsInRole("Director")|| User.IsInRole("Subdirector")))
+                        {
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index","Usuarios")" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Agregar Usuario
+                                        
+                                    </p>
+                                </a>
+                            </li>
+                        }
+                       @if (User!= null &&( User.IsInRole("Administrador") || User.IsInRole("Director") || User.IsInRole("Subdirector") || User.IsInRole("Coordinador")))
+                       {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "AlumnosTbs")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Agregar Alumno
+                                   
+                                </p>
+                            </a>
+                        </li>
+                       }
+                        @if (User != null && (User.IsInRole("Administrador") || User.IsInRole("Director") || User.IsInRole("Subdirector")))
+                        {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Asesores")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Agregar Asesores
+                                </p>
+                            </a>
+                        </li>
+                        }
+                        @if (User != null && User.IsInRole("Administrador") || User.IsInRole("Director") || User.IsInRole("Subdirector"))
+                        {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "MateriasTbs")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Administracion de Materias
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Carreras")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Carreras
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Grupos")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                   Grupos
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "temasTbs")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Temas
+                                </p>
+                            </a>
+                        </li>
+                        }
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        <div class="content-wrapper">
+            <section class="content">
+                    @RenderBody()
+
+            </section>
+        </div>
+        <footer class="main-footer">
+            <p>&copy; @DateTime.Now.Year - AsesoriasFIAD</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

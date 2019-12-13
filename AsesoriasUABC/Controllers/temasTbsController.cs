@@ -39,6 +39,7 @@ namespace AsesoriasUABC.Controllers
         // GET: temasTbs/Create
         public ActionResult Create()
         {
+            ViewBag.id_Materias = new SelectList(db.MateriasTb.ToList(),"id_materia","nombre");
             return View();
         }
 
@@ -51,11 +52,12 @@ namespace AsesoriasUABC.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.temasTb.Add(temasTb);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.id_Materias = new SelectList(db.MateriasTb.ToList(), "id_materia", "nombre");
             return View(temasTb);
         }
 
@@ -66,11 +68,14 @@ namespace AsesoriasUABC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             temasTb temasTb = db.temasTb.Find(id);
             if (temasTb == null)
             {
+                
                 return HttpNotFound();
             }
+            ViewBag.id_Materias = new SelectList(db.MateriasTb.ToList(), "id_materia", "nombre", temasTb.id_Materias);
             return View(temasTb);
         }
 
@@ -87,6 +92,7 @@ namespace AsesoriasUABC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.id_Materias = new SelectList(db.MateriasTb.ToList(), "id_materia", "nombre", temasTb.id_Materias);
             return View(temasTb);
         }
 
@@ -115,7 +121,11 @@ namespace AsesoriasUABC.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public bool validado (temasTb tema)
+        {
 
+            return false;
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

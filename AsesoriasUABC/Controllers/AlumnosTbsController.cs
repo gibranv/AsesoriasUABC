@@ -72,7 +72,7 @@ namespace AsesoriasUABC.Controllers
         [HttpPost]
         public ActionResult AlumnosCreate(ExcelViewModel importExcel)
         {
-            string path = Server.MapPath("~/Content/Upload/" + importExcel.file.FileName);
+            string path = Server.MapPath("~/Content/dist" + importExcel.file.FileName);
             importExcel.file.SaveAs(path);
             using (var stream = System.IO.File.Open(path, FileMode.Open, FileAccess.Read))
             {

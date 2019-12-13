@@ -4,20 +4,19 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Styles.Render("~/Content/css/tables")
-
 @section SubMenueOptions{
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-
+        <li class="nav-item d-done d-sm-inline-block">
+            <a href="@Url.Action("Create","AsesoriasTbs")" class="nav-link"><i class="fas fa-plus-circle"></i> Agregar Asesoria </a>
+        </li>
     </ul>
 }
+@Styles.Render("~/Content/css/tables")
 @Scripts.Render("~/bundles/tables")
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Asesorias</h2>
 <div class="card">
     <div class="card-body">
 
@@ -58,9 +57,11 @@
                             @Html.DisplayFor(modelItem => item.cvc)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_asesoria }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id_asesoria }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_asesoria })
+
+                            <a href="@Url.Action("Edit","AsesoriasTbs", new { id = item.Id_asesoria })" class="btn btn-link"><i class="fas fa-edit"></i> </a>
+                            <a href="@Url.Action("Details","AsesoriasTbs", new { id = item.Id_asesoria })" class="btn btn-link"><i class="fas fa-clipboard"></i> </a>
+                            <a href="@Url.Action("Delete","AsesoriasTbs", new { id = item.Id_asesoria })" class="btn btn-link"><i class="fas fa-trash"></i> </a>
+
                         </td>
                     </tr>
                 }
@@ -69,13 +70,3 @@
         </table>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        
-        $("#table").DataTable({
-
-
-
-        });
-    })
-</script>

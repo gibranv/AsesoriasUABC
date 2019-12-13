@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AsesoriasUABC.Models.AsesoresTb>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section SubMenueOptions{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-done d-sm-inline-block">
+            <a href="@Url.Action("Create","Asesores")" class="nav-link"><i class="fas fa-plus-circle"></i> Agregar Asesor </a>
+        </li>
+    </ul>
+}
+@Styles.Render("~/Content/css/tables")
+@Scripts.Render("~/bundles/tables")
+
+
+<h2> Asesores</h2>
+<div class="card">
+    <div class="card-body">
+        <table class="table table-bordered table-striped" id="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.codigo_empleado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.correo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.sexo)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.ApellidoP) @Html.DisplayFor(modelItem => item.ApellidoM)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.codigo_empleado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.correo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sexo)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit","Asesores", new { id = item.Id_Asesores })" class="btn btn-link"><i class="fas fa-edit"></i> </a>
+                            <a href="@Url.Action("Details","Asesores", new { id = item.Id_Asesores })" class="btn btn-link"><i class="fas fa-clipboard"></i> </a>
+                            <a href="@Url.Action("Delete","Asesores", new { id = item.Id_Asesores})" class="btn btn-link"><i class="fas fa-trash"></i> </a>
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

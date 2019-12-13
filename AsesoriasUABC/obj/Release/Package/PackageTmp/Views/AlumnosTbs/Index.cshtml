@@ -1,0 +1,65 @@
+﻿@model  IEnumerable<AsesoriasUABC.Models.AlumnosTb >
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section SubMenueOptions{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-done d-sm-inline-block">
+            <a href="@Url.Action("Create","AlumnosTbs")" class="nav-link"><i class="fas fa-plus-circle"></i> Agregar Alumno </a>
+        </li>
+    </ul>
+}
+@Styles.Render("~/Content/css/tables")
+@Scripts.Render("~/bundles/tables")
+<h2>Alumnos</h2>
+<div class="card">
+    <div class="card-body">
+
+        <table class="table table-bordered table-striped" id="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.matricula )
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre )
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.sexo)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.matricula)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.apellidoP) @Html.DisplayFor(modelItem => item.apellidoM)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sexo)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit","AlumnosTbs", new { id = item.id_Alumno })" class="btn btn-link"><i class="fas fa-edit"></i> </a>
+                            <a href="@Url.Action("Details","AlumnosTbs", new { id = item.id_Alumno })" class="btn btn-link"><i class="fas fa-clipboard"></i> </a>
+                            <a href="@Url.Action("Delete","AlumnosTbs", new { id = item.id_Alumno })" class="btn btn-link"><i class="fas fa-trash"></i> </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>

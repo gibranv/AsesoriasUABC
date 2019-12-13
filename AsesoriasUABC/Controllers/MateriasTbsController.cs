@@ -51,7 +51,7 @@ namespace AsesoriasUABC.Controllers
         [HttpPost]
         public ActionResult Create(ExcelViewModel importExcel)
         {
-            string path = Server.MapPath("~/Content/Upload/" + importExcel.file.FileName);
+            string path = Server.MapPath("~/Content/dist" + importExcel.file.FileName);
             importExcel.file.SaveAs(path);
             using (var stream = System.IO.File.Open(path, FileMode.Open, FileAccess.Read))
             {
@@ -63,9 +63,9 @@ namespace AsesoriasUABC.Controllers
                     DataTable table = result.Tables[0];
                     DataRow clave_materia = table.Rows[0];
                     DataRow plan_de_estudios = table.Rows[1];
-                    DataRow nombre = table.Rows[3];
+                    DataRow nombre = table.Rows[2];
                     List<DataRow> temas = new List<DataRow>();
-                    int i = 4;
+                    int i = 3;
                     do
                     {
                         temas.Add(table.Rows[i]);

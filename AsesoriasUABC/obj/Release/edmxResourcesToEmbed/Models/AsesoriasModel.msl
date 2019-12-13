@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBAsesoriasFIADModelStoreContainer" CdmEntityContainer="DBAsesoriasFIADEntities">
+    <EntitySetMapping Name="Alumnos_Grupos">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Alumnos_Grupos">
+        <MappingFragment StoreEntitySet="Alumnos_Grupos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+          <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AlumnosTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AlumnosTb">
+        <MappingFragment StoreEntitySet="AlumnosTb">
+          <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="id_Alumno" ColumnName="id_Alumno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AsesoresTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoresTb">
+        <MappingFragment StoreEntitySet="AsesoresTb">
+          <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="codigo_empleado" ColumnName="codigo_empleado" />
+          <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="Id_Asesores" ColumnName="Id_Asesores" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AsesoriasTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.AsesoriasTb">
+        <MappingFragment StoreEntitySet="AsesoriasTb">
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="cvc" ColumnName="cvc" />
+          <ScalarProperty Name="id_asesor" ColumnName="id_asesor" />
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="Id_asesoria" ColumnName="Id_asesoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="carreras">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.carreras">
+        <MappingFragment StoreEntitySet="carreras">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grupos">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Grupos">
+        <MappingFragment StoreEntitySet="Grupos">
+          <ScalarProperty Name="num_grupo" ColumnName="num_grupo" />
+          <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materias_Grupos">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Materias_Grupos">
+        <MappingFragment StoreEntitySet="Materias_Grupos">
+          <ScalarProperty Name="id_asesor" ColumnName="id_asesor" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MateriasTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.MateriasTb">
+        <MappingFragment StoreEntitySet="MateriasTb">
+          <ScalarProperty Name="plan_estudios" ColumnName="plan_estudios" />
+          <ScalarProperty Name="clave_materia" ColumnName="clave_materia" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="temasTb">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.temasTb">
+        <MappingFragment StoreEntitySet="temasTb">
+          <ScalarProperty Name="id_Materias" ColumnName="id_Materias" />
+          <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
+          <ScalarProperty Name="numero_tema" ColumnName="numero_tema" />
+          <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetGruposAlumno" FunctionName="DBAsesoriasFIADModel.Store.SP_GetGruposAlumno">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetGruposAlumno_Result">
+          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+          <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+          <ScalarProperty Name="num_grupo" ColumnName="num_grupo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_GetMateriasGrupo" FunctionName="DBAsesoriasFIADModel.Store.Sp_GetMateriasGrupo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.Sp_GetMateriasGrupo_Result">
+          <ScalarProperty Name="id_materia" ColumnName="id_materia" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetAsesores" FunctionName="DBAsesoriasFIADModel.Store.SP_GetAsesores">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetAsesores_Result">
+          <ScalarProperty Name="id_Asesores" ColumnName="id_Asesores" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+          <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetTemasMateria" FunctionName="DBAsesoriasFIADModel.Store.SP_GetTemasMateria">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetTemasMateria_Result">
+          <ScalarProperty Name="id_Temas" ColumnName="id_Temas" />
+          <ScalarProperty Name="nombre_tema" ColumnName="nombre_tema" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_AgregarUsuario" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarUsuario" />
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="DBAsesoriasFIADModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="codigo_empleado" ColumnName="codigo_empleado" />
+          <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+          <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="id_AspUser" ColumnName="id_AspUser" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetCarreras" FunctionName="DBAsesoriasFIADModel.Store.SP_GetCarreras">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBAsesoriasFIADModel.SP_GetCarreras_Result">
+          <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_AgregarAlumno" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarAlumno" />
+    <FunctionImportMapping FunctionImportName="SP_AgregarTema" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarTema" />
+    <FunctionImportMapping FunctionImportName="SP_AgregarMateria" FunctionName="DBAsesoriasFIADModel.Store.SP_AgregarMateria" />
+  </EntityContainerMapping>
+</Mapping>

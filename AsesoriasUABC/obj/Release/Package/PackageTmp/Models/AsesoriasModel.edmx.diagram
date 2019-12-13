@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6c908544eaa94919b3c702b9d75afcbf" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.Alumnos_Grupos" Width="1.5" PointX="5.125" PointY="4.75" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.AlumnosTb" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.AsesoresTb" Width="1.5" PointX="0.75" PointY="15.375" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.AsesoriasTb" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.carreras" Width="1.5" PointX="1.5" PointY="11.875" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.Grupos" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.Materias_Grupos" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.MateriasTb" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.temasTb" Width="1.5" PointX="3" PointY="14.5" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_AsesoriasTb_AsesoresTb" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_AsesoriasTb_MateriasTb" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_Grupos_carreras" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_Grupos_Grupos" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_Materias_Grupos_MateriasTb" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_temasTb_MateriasTb" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_Alumnos_Grupos_AlumnosTb" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_Alumnos_Grupos_Grupos" />
+        <AssociationConnector Association="DBAsesoriasFIADModel.FK_Materias_Grupos_AsesoresTb" />
+        <EntityTypeShape EntityType="DBAsesoriasFIADModel.Usuarios" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -27,9 +27,9 @@
         </nav>
         <aside class="main-sidebar sidebar-light-lime elevation-4">
             <!-- Brand Logo -->
-            <a href="../../index3.html" class="brand-link">
+            <a href="#" class="brand-link">
                 <span>FIAD</span>
-                <span class="brand-text font-weight-light">| Assesorias</span>
+                <span class="brand-text font-weight-light">| Asesorias</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -40,7 +40,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                        
                         <li class="nav-item">
-                            <a href="@Url.Action("Create","AsesoriasTbs")" class="nav-link">
+                            <a href="@Url.Action("Index","AsesoriasTbs")" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Agregar Asesoria
@@ -52,7 +52,7 @@
                         @if (User != null && (User.IsInRole("Administrador") || User.IsInRole("Director")|| User.IsInRole("Subdirector")))
                         {
                             <li class="nav-item">
-                                <a href="@Url.Action("Create","Usuarios")" class="nav-link">
+                                <a href="@Url.Action("Index","Usuarios")" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Agregar Usuario
@@ -64,7 +64,7 @@
                        @if (User!= null &&( User.IsInRole("Administrador") || User.IsInRole("Director") || User.IsInRole("Subdirector") || User.IsInRole("Coordinador")))
                        {
                         <li class="nav-item">
-                            <a href="@Url.Action("AlumnosCreate", "AlumnosTbs")" class="nav-link">
+                            <a href="@Url.Action("Index", "AlumnosTbs")" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Agregar Alumno
@@ -76,7 +76,7 @@
                         @if (User != null && (User.IsInRole("Administrador") || User.IsInRole("Director") || User.IsInRole("Subdirector")))
                         {
                         <li class="nav-item">
-                            <a href="@Url.Action("Create", "Asesores")" class="nav-link">
+                            <a href="@Url.Action("Index", "Asesores")" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Agregar Asesores
@@ -87,7 +87,7 @@
                         @if (User != null && User.IsInRole("Administrador") || User.IsInRole("Director") || User.IsInRole("Subdirector"))
                         {
                         <li class="nav-item">
-                            <a href="@Url.Action("Create", "MateriasTbs")" class="nav-link">
+                            <a href="@Url.Action("Index", "MateriasTbs")" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Administracion de Materias
@@ -95,7 +95,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Create", "Carreras")" class="nav-link">
+                            <a href="@Url.Action("Index", "Carreras")" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Carreras
@@ -103,10 +103,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Create", "Grupos")" class="nav-link">
+                            <a href="@Url.Action("Index", "Grupos")" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                    Grupos
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "temasTbs")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Temas
                                 </p>
                             </a>
                         </li>
